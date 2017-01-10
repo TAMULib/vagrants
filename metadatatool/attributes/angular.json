@@ -14,7 +14,7 @@
     "angular": {
         "app": {
             "port": 80,
-            "name": "metadata-tool",
+            "name": "metadatatool",
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
             "deploy": "master",
             "conf": {
