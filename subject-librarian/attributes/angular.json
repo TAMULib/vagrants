@@ -28,5 +28,12 @@
     "nodejs": {
         "install_method": "binary",
         "version": "7.4.0"
+    },
+    "lib-iptables": {
+        "open-ports": {
+            "tcp": [
+                80, 443
+            ]
+        }
     }
 }

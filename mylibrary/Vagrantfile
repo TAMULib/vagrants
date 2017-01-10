@@ -46,6 +46,7 @@ Vagrant.configure('2') do |config|
     # provision ui
     config.vm.define $ui do |ui|
         port(ui, 80, 80)
+        port(ui, 443, 443)
         runlist = ['recipe[mylibrary-ui::default@0.6.0]']
         attributes = JSON.parse(File.read("attributes/#{$ui}.json"))
         owner = attributes['angular']['user_id']
