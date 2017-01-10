@@ -1,0 +1,63 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'chef'
+require 'json'
+
+require '../common/machine_config'
+require '../common/synced_folder'
+require '../common/utilities'
+
+VAGRANTFILE_API_VERSION = '2'.freeze
+
+# this makes the assumption the .chef directory is located in the users home directory
+Chef::Config.from_file(File.join(File.expand_path('~'), '.chef', 'knife.rb'))
+
+# matches chef 11 development server
+$chef_version = '11.18.12'
+
+# set base name to host machine name hyphen app name
+$base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + '-mylibrary'
+
+# service name, used for attributes file name, synced forlder name and guest hostname
+$service = 'spring'
+
+# ui name, used for attributes file name, synced forlder name and guest hostname
+$ui = 'angular'
+
+Vagrant.configure('2') do |config|
+    # set omnibus chef version from global variable
+    config.omnibus.chef_version = $chef_version
+
+    # disable berkshelf
+    config.berkshelf.enabled = false
+
+    # provision service
+    config.vm.define $service do |service|
+        port(service, 9004, 9004)
+        runlist = ['recipe[git]', 'recipe[mylibrary::default@0.7.0]']
+        attributes = JSON.parse(File.read("attributes/#{$service}.json"))
+        synced_folder = SyncedFolder.new($service, ['dmode=777', 'fmode=666'])
+        machine_name = "#{$base_name}-#{$service}"
+        machine = MachineConfig.new(machine_name, synced_folder)
+        provision(service, machine, runlist, attributes)
+    end
+
+    # provision ui
+    config.vm.define $ui do |ui|
+        port(ui, 80, 80)
+        runlist = ['recipe[mylibrary-ui::default@0.6.0]']
+        attributes = JSON.parse(File.read("attributes/#{$ui}.json"))
+        owner = attributes['angular']['user_id']
+        group = attributes['angular']['group_id']
+        synced_folder = SyncedFolder.new($ui, [], owner, group)
+        machine_name = "#{$base_name}-#{$ui}"
+        machine = MachineConfig.new(machine_name, synced_folder)
+        provision(ui, machine, runlist, attributes)
+    end
+
+    # clean up files on the host after the guest is destroyed
+    config.trigger.after :destroy do
+        run 'rm -rf src/'
+    end
+end

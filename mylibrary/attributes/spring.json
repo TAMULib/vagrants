@@ -1,0 +1,34 @@
+{
+    "testKitchen": false,
+    "hipchat": {
+        "nickname": "Vagrant",
+        "notify": false,
+        "token": "6220b0d589fc771b5105aff76017ee",
+        "rooms": {
+            "default": {
+                "name": "Local Dev Notifications",
+                "color": "green"
+            }
+        }
+    },
+    "tomcat": {
+        "port": 9004,
+        "dist": {
+            "uri": "http://archive.apache.org/dist/"
+        }
+    },
+    "spring": {
+        "app": {
+            "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
+            "db": {
+                "driver": "org.h2.Driver",
+                "user": "sa",
+                "platform": "org.hibernate.dialect.H2Dialect"
+            },
+            "deploy": "master"
+        }
+    },
+    "voyager": {
+        "primary_host": "surprise.tamu.edu"
+    }
+}
