@@ -17,3 +17,12 @@ TAMU project development vagrants provisioned by development chef server
     e.g. ```export ID_RSA_PATH="/Users/aggiejack/.ssh/id_rsa"```
 - export environment variable, CHEF_HOME, to locate chef server client pem file
     e.g. ```export CHEF_HOME="/etc/chef"```
+
+## configure
+
+Roles are defined from the attributes json files.
+
+## deploy
+
+1. ```cd [project]```
+2. ```vagrant up```
