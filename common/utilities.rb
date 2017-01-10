@@ -19,7 +19,7 @@ def provision(app, machine, runlist, attrubutes)
                          group: machine.sync.group
 
     # copy ssh key for git clone
-    app.vm.provision 'file', source: (ENV['VAGRANT_ID_RSA']).to_s,
+    app.vm.provision 'file', source: (ENV['ID_RSA_PATH']).to_s,
                              destination: '/home/vagrant/.ssh/git_id_rsa'
 
     # perform chef provision
@@ -34,9 +34,11 @@ def provision(app, machine, runlist, attrubutes)
         chef.validation_key_path = Chef::Config[:validation_key]
         chef.validation_client_name = Chef::Config[:validation_client_name]
 
+        chef_home = (ENV['CHEF_HOME']).to_s
+
         # install location of the chef client
-        chef.provisioning_path = '/etc/chef'
-        chef.client_key_path = '/etc/chef/client.pem'
+        chef.provisioning_path = chef_home
+        chef.client_key_path = "#{chef_home}/client.pem"
 
         chef.delete_node = true
         chef.delete_client = true
