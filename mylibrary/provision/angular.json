@@ -1,0 +1,11 @@
+{
+    "ports": [{
+        "guest": 8080,
+        "host": 8080
+    }],
+    "memory": 2024,
+    "cpus": 2,
+    "runlist": [
+        "recipe[mylibrary-ui::default@0.6.0]"
+    ]
+}

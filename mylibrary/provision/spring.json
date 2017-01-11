@@ -1,0 +1,12 @@
+{
+    "ports": [{
+        "guest": 9000,
+        "host": 9000
+    }],
+    "memory": 2024,
+    "cpus": 2,
+    "runlist": [
+        "recipe[git]",
+        "recipe[mylibrary::default@0.7.0]"
+    ]
+}

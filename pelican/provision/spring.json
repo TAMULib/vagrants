@@ -1,0 +1,12 @@
+{
+    "ports": [{
+        "guest": 9000,
+        "host": 9000
+    }],
+    "memory": 2024,
+    "cpus": 2,
+    "runlist": [
+        "recipe[lib-tomcat]",
+        "recipe[pelican::default@0.2.0]"
+    ]
+}

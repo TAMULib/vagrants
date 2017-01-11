@@ -22,7 +22,7 @@ TAMU project development chef_client provisioning vagrants.
 
 ## configure
 
-Roles are defined from the attributes json files.
+Roles are defined from the attributes json files. Provisioning is defined in provision json files.
 
 ## gotcha
 
@@ -32,19 +32,19 @@ Virtual box will not bind to host ports < 1024. Therefor the UIs are hosted on p
 
 Alternatively, bind from host: 8080 to guest: 80 and proxy host apache using a VirtualHost ProxyPass to port 8080.
 
-1. change ```port(ui, 8080, 8080)``` to ```port(ui, 8080, 80)``` in the Vagrantfile
-2. change all occurrences of 8080 to 80 in the angular.json file
+1. change guest port to 80 in provision/angular.json file
+2. change all occurrences of 8080 to 80 in the attributes/angular.json file
 3. setup host apache following:
     - Install the HTTP proxy module ```a2enmod proxy_http```
     - Make sure Apache is listening on port 80
     - Add the following VirtualHost to Apache configuration, httpd.conf, or add to a sites-avaliable
       ```
-      <VirtualHost *:80>
-          ProxyPreserveHost On
-          ProxyRequests Off
-          ProxyPass / http://localhost:8080/
-          ProxyPassReverse / http://localhost:8080/
-      </VirtualHost>
+          <VirtualHost *:80>
+              ProxyPreserveHost On
+              ProxyRequests Off
+              ProxyPass / http://localhost:8080/
+              ProxyPassReverse / http://localhost:8080/
+          </VirtualHost>
       ```
     - restart Apache
 

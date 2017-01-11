@@ -1,12 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require 'chef'
-require 'json'
+require 'chef' # used for chef_client provisioning
+require 'json' # used for parsing json
 
-require '../common/machine_config'
-require '../common/synced_folder'
-require '../common/utilities'
+require '../common'
 
 VAGRANTFILE_API_VERSION = '2'.freeze
 
@@ -19,9 +17,6 @@ $chef_version = '11.18.12'
 # set base name to host machine name hyphen app name
 $base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + '-pelican'
 
-# service name, used for synced forlder name and guest hostname
-$service = 'spring'
-
 Vagrant.configure('2') do |config|
     # set omnibus chef version from global variable
     config.omnibus.chef_version = $chef_version
@@ -30,18 +25,8 @@ Vagrant.configure('2') do |config|
     config.berkshelf.enabled = false
 
     # provision service
-    config.vm.define $service do |service|
-        port(service, 9001, 9001)
-        runlist = ['recipe[lib-tomcat]', 'recipe[pelican::default@0.2.0]']
-        attributes = JSON.parse(File.read("attributes/#{$service}.json"))
-        synced_folder = SyncedFolder.new($service, "src/#{$service}", "/data/#{$service}", ['dmode=777', 'fmode=666'])
-        machine_name = "#{$base_name}-#{$service}"
-        machine = MachineConfig.new(machine_name, synced_folder)
-        provision(service, machine, runlist, attributes)
-    end
+    define(config, $base_name, 'spring')
 
     # clean up files on the host after the guest is destroyed
-    config.trigger.after :destroy do
-        run 'rm -rf src/'
-    end
+    cleanup(config)
 end
