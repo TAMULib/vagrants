@@ -47,7 +47,7 @@ def port(app, guest, host, protocol = 'tcp')
 end
 
 # method to perform detailed chef provisioning
-def provision(app, machine, runlist, attrubutes)
+def provision(app, machine, runlist, attributes)
     # configure settings
     setup(app, machine)
 
@@ -79,7 +79,7 @@ def provision(app, machine, runlist, attrubutes)
         chef.delete_node = true
         chef.delete_client = true
         chef.run_list = runlist
-        chef.json = attrubutes
+        chef.json = attributes
     end
 end
 
