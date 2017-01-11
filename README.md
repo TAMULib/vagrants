@@ -4,10 +4,17 @@ TAMU project development chef_client provisioning vagrants.
 
 ## dependencies
 
-1. [virtual box](https://www.virtualbox.org/wiki/Downloads)
-2. [chef client](https://downloads.chef.io/chef)
-3. [vagrant](https://www.vagrantup.com/downloads.html)
-4. [vagrant-triggers plugin](https://github.com/emyl/vagrant-triggers)
+1. [virtual box](https://www.virtualbox.org/wiki/Downloads) >= v5.1.12
+2. [chef client](https://downloads.chef.io/chef) >= v12.15.19
+3. [vagrant](https://www.vagrantup.com/downloads.html) >= v1.9.1
+
+## vagrant plugins
+
+- ```vagrant plugin install chef```
+- ```vagrant plugin install vagrant-berkshelf```
+- ```vagrant plugin install vagrant-omnibus```
+- ```vagrant plugin install vagrant-vbguest```
+- ```vagrant plugin install vagrant-triggers```
 
 ## setup
 
