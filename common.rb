@@ -37,7 +37,7 @@ def define(config, base_name, name)
         provision['ports'].each { |port| port(app, port['guest'], port['host']) }
         synced_folder = SyncedFolder.new(name, "src/#{name}", "/data/#{name}", provision['mount_options'])
         machine = MachineConfig.new("#{base_name}-#{name}", synced_folder, provision['box'], provision['memory'], provision['cpus'])
-        provision(app, name, machine, provision['runlist'], attributes)
+        provision(app, machine, provision['runlist'], attributes)
     end
 end
 
@@ -47,9 +47,9 @@ def port(app, guest, host, protocol = 'tcp')
 end
 
 # method to perform detailed chef provisioning
-def provision(app, name, machine, runlist, attributes)
+def provision(app, machine, runlist, attributes)
     # configure settings
-    setup(app, name, machine)
+    setup(app, machine)
 
     # create synced folder using nfs for development
     app.vm.synced_folder machine.sync.src.to_s, machine.sync.dest.to_s,
@@ -84,11 +84,11 @@ def provision(app, name, machine, runlist, attributes)
 end
 
 # method to setup virtual machine
-def setup(app, name, machine)
+def setup(app, machine)
     app.vm.box = machine.box
     app.vm.hostname = machine.name
     app.vm.provider :virtualbox do |vb|
-        vb.customize ['setextradata', :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/data/#{name}", '1']
+        vb.customize ['setextradata', :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/#{machine.sync.name}", '1']
         vb.customize ['modifyvm', :id, '--cpuexecutioncap', '50']
         vb.name = machine.name
         vb.memory = machine.memory

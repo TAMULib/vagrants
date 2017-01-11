@@ -7,7 +7,7 @@
         "dmode=777",
         "fmode=666"
     ],
-    "box": "centos/6",
+    "box": "centos/7",
     "memory": 2024,
     "cpus": 2,
     "runlist": [
