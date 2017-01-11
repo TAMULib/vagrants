@@ -3,6 +3,10 @@
         "guest": 8080,
         "host": 8080
     }],
+    "mount_options": [
+        "dmode=777",
+        "fmode=666"
+    ],
     "memory": 2024,
     "cpus": 2,
     "runlist": [

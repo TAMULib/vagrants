@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 class MachineConfig
-    def initialize(name, sync, memory = 2048, cpus = 2)
+    def initialize(name, sync, memory, cpus)
         @name = name
         @sync = sync
         @memory = memory
@@ -33,7 +33,7 @@ def define(config, base_name, name)
         provision = JSON.parse(File.read("provision/#{name}.json"))
         attributes = JSON.parse(File.read("attributes/#{name}.json"))
         provision['ports'].each { |port| port(service, port['guest'], port['host']) }
-        synced_folder = SyncedFolder.new(name, "src/#{name}", "/data/#{name}", ['dmode=777', 'fmode=666'])
+        synced_folder = SyncedFolder.new(name, "src/#{name}", "/data/#{name}", provision['mount_options'])
         machine = MachineConfig.new("#{base_name}-#{name}", synced_folder, provision['memory'], provision['cpus'])
         provision(service, machine, provision['runlist'], attributes)
     end
