@@ -38,14 +38,14 @@ Alternatively, bind from host: 8080 to guest: 80 and proxy host apache using a V
     - Install the HTTP proxy module ```a2enmod proxy_http```
     - Make sure Apache is listening on port 80
     - Add the following VirtualHost to Apache configuration, httpd.conf, or add to a sites-avaliable
-      ```
+    ```xml
       <VirtualHost *:80>
-          ProxyPreserveHost On
-          ProxyRequests Off
-          ProxyPass / http://localhost:8080/
-          ProxyPassReverse / http://localhost:8080/
+        ProxyPreserveHost On
+        ProxyRequests Off
+        ProxyPass / http://localhost:8080/
+        ProxyPassReverse / http://localhost:8080/
       </VirtualHost>
-      ```
+    ```
     - restart Apache
 
 ## deploy
