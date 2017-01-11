@@ -34,7 +34,7 @@ Vagrant.configure('2') do |config|
         port(service, 9001, 9001)
         runlist = ['recipe[lib-tomcat]', 'recipe[pelican::default@0.2.0]']
         attributes = JSON.parse(File.read("attributes/#{$service}.json"))
-        synced_folder = SyncedFolder.new($service, ['dmode=777', 'fmode=666'])
+        synced_folder = SyncedFolder.new($service, "src/#{$service}", "/data/#{$service}", ['dmode=777', 'fmode=666'])
         machine_name = "#{$base_name}-#{$service}"
         machine = MachineConfig.new(machine_name, synced_folder)
         provision(service, machine, runlist, attributes)

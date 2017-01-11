@@ -27,8 +27,15 @@
             }
         }
     },
+    "lib-iptables": {
+        "open-ports": {
+            "tcp": [
+                9002
+            ]
+        }
+    },
     "tomcat": {
-        "port": 9003,
+        "port": 9002,
         "dist": {
             "uri": "http://archive.apache.org/dist/"
         }
