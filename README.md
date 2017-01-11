@@ -1,6 +1,6 @@
 # vagrants
 
-TAMU project development vagrants provisioned by development chef server.
+TAMU project development chef_client provisioning vagrants.
 
 ## dependencies
 
@@ -29,7 +29,7 @@ Roles are defined from the attributes json files.
 1. ```cd [project]```
 2. ```vagrant up```
 
-Deploy will create, configure, provision, and start VMs with the associating project. There will be a synced directory, src directory relative to the Vagrantfile, and the deployed app directory on the VM. There will be a client and node created on the chef server associated with the development deployment. 
+Deploy will create, configure, provision, and start VMs with the associating project. There will be a synced directory, src directory relative to the Vagrantfile, and the deployed app directory on the VM. There will be a client and node created on the chef server associated with the development deployment.
 
 ## cleanup
 
