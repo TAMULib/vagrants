@@ -31,13 +31,13 @@ end
 
 # method to define the chef provisioning
 def define(config, base_name, name)
-    config.vm.define name do |service|
+    config.vm.define name do |app|
         provision = JSON.parse(File.read("provision/#{name}.json"))
         attributes = JSON.parse(File.read("attributes/#{name}.json"))
-        provision['ports'].each { |port| port(service, port['guest'], port['host']) }
+        provision['ports'].each { |port| port(app, port['guest'], port['host']) }
         synced_folder = SyncedFolder.new(name, "src/#{name}", "/data/#{name}", provision['mount_options'])
         machine = MachineConfig.new("#{base_name}-#{name}", synced_folder, provision['box'], provision['memory'], provision['cpus'])
-        provision(service, machine, provision['runlist'], attributes)
+        provision(app, machine, provision['runlist'], attributes)
     end
 end
 
@@ -51,7 +51,7 @@ def provision(app, machine, runlist, attrubutes)
     # configure settings
     setup(app, machine)
 
-    # create synced folder for development
+    # create synced folder using nfs for development
     app.vm.synced_folder machine.sync.src.to_s, machine.sync.dest.to_s,
                          id: machine.sync.name, create: true,
                          mount_options: machine.sync.mount_options

@@ -30,15 +30,12 @@ Virtual box will not bind to host ports < 1024. Therefor the UIs are hosted on p
 
   e.g. ```http://localhost:8080/[project]```
 
-Alternatively, bind from host: 8080 to guest: 80 and proxy host apache using a VirtualHost ProxyPass to port 8080.
+Optional, configure Apache proxy using a VirtualHost ProxyPass to port 8080.
 
-1. change guest port to 80 in provision/angular.json file
-2. change all occurrences of 8080 to 80 in the attributes/angular.json file
-3. setup host apache following:
-    - Install the HTTP proxy module ```a2enmod proxy_http```
-    - Make sure Apache is listening on port 80
-    - Add the following VirtualHost to Apache configuration, httpd.conf, or add to a sites-avaliable
-    <br /><br />
+1. Install the HTTP proxy module ```a2enmod proxy_http```
+2. Make sure Apache is listening on port 80
+3. Add the following VirtualHost to Apache configuration, httpd.conf, or add to a sites-avaliable
+    <br />
     ```xml
       <VirtualHost *:80>
         ProxyPreserveHost On
@@ -48,14 +45,14 @@ Alternatively, bind from host: 8080 to guest: 80 and proxy host apache using a V
       </VirtualHost>
     ```
 
-    - restart Apache
+4. restart Apache
 
 ## deploy
 
 1. ```cd [project]```
 2. ```vagrant up```
 
-Deploy will create, configure, provision, and start VMs with the associating project. There will be a synced directory, src directory relative to the Vagrantfile, and the deployed app directory on the VM. There will be a client and node created on the chef server associated with the development deployment.
+Deploy will create, configure, provision, and start VMs with the associating project. There will be a synced directory, src directory relative to the Vagrantfile, and /data/[deploy] directory on the VM. There will be a client and node created on the chef server associated with the development deployment.
 
 ## cleanup
 

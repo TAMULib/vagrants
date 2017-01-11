@@ -13,9 +13,13 @@
     },
     "angular": {
         "app": {
-            "port": 8080,
+            "port": 80,
             "name": "mylibrary",
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
+            "framework": {
+                "enabled": true,
+                "keyurl": "file:///home/vagrant/.ssh/git_id_rsa"
+            },
             "deploy": "master",
             "conf": {
                 "authService_host": "https://labs.library.tamu.edu/auth2",
@@ -26,7 +30,7 @@
     "lib-iptables": {
         "open-ports": {
             "tcp": [
-                8080
+                80
             ]
         }
     },

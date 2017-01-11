@@ -13,7 +13,7 @@
     },
     "angular": {
         "app": {
-            "port": 8080,
+            "port": 80,
             "name": "subject-librarian",
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
             "deploy": "master",
@@ -26,7 +26,7 @@
     "lib-iptables": {
         "open-ports": {
             "tcp": [
-                8080
+                80
             ]
         }
     },
