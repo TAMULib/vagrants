@@ -11,12 +11,6 @@
             }
         }
     },
-    "tomcat": {
-        "port": 9000,
-        "dist": {
-            "uri": "http://archive.apache.org/dist/"
-        }
-    },
     "spring": {
         "app": {
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
@@ -26,6 +20,12 @@
                 "platform": "org.hibernate.dialect.H2Dialect"
             },
             "deploy": "master"
+        }
+    },
+    "tomcat": {
+        "port": 9000,
+        "dist": {
+            "uri": "http://archive.apache.org/dist/"
         }
     }
 }

@@ -25,15 +25,15 @@
         "user_id": 312,
         "group_id": 312
     },
-    "nodejs": {
-        "install_method": "binary",
-        "version": "7.1.0"
-    },
     "lib-iptables": {
         "open-ports": {
             "tcp": [
                 80, 443
             ]
         }
+    },
+    "nodejs": {
+    	"install_method": "binary",
+    	"version": "7.4.0"
     }
 }

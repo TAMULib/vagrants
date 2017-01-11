@@ -11,12 +11,6 @@
             }
         }
     },
-    "tomcat": {
-        "port": 9002,
-        "dist": {
-            "uri": "http://archive.apache.org/dist/"
-        }
-    },
     "spring": {
         "app": {
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
@@ -29,6 +23,12 @@
             "conf": {
                 "subjectapp": "http://localhost:9003"
             }
+        }
+    },
+    "tomcat": {
+        "port": 9002,
+        "dist": {
+            "uri": "http://archive.apache.org/dist/"
         }
     }
 }

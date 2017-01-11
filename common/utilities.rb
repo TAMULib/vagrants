@@ -6,13 +6,25 @@ def port(app, guest, host, protocol = 'tcp')
     app.vm.network 'forwarded_port', guest: guest, host: host, protocol: protocol
 end
 
+# method to setup virtual machine
+def setup(app, machine)
+    app.vm.box = 'centos/6'
+    app.vm.hostname = machine.name
+    app.vm.provider :virtualbox do |vb|
+        vb.customize ['modifyvm', :id, '--cpuexecutioncap', '50']
+        vb.name = machine.name
+        vb.memory = machine.memory
+        vb.cpus = machine.cpus
+    end
+end
+
 # method to perform detailed chef provisioning
 def provision(app, machine, runlist, attrubutes)
     # configure settings
     setup(app, machine)
 
     # create synced folder for development
-    app.vm.synced_folder "src/#{machine.sync.name}", "/data/#{machine.sync.name}",
+    app.vm.synced_folder "src/#{machine.sync.src}", "/data/#{machine.sync.dest}",
                          id: machine.sync.name, create: true,
                          mount_options: machine.sync.mount_options,
                          owner: machine.sync.owner,
@@ -42,17 +54,5 @@ def provision(app, machine, runlist, attrubutes)
         chef.delete_client = true
         chef.run_list = runlist
         chef.json = attrubutes
-    end
-end
-
-# method to setup virtual machine
-def setup(app, machine)
-    app.vm.box = 'centos/6'
-    app.vm.hostname = machine.name
-    app.vm.provider :virtualbox do |vb|
-        vb.customize ['modifyvm', :id, '--cpuexecutioncap', '50']
-        vb.name = machine.name
-        vb.memory = machine.memory
-        vb.cpus = machine.cpus
     end
 end
