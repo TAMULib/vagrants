@@ -2,13 +2,15 @@
 # vi: set ft=ruby :
 
 class MachineConfig
-    def initialize(name, sync, memory, cpus)
+    def initialize(name, sync, box, memory, cpus)
         @name = name
+        @box = box
         @sync = sync
         @memory = memory
         @cpus = cpus
     end
     attr_reader :name
+    attr_reader :box
     attr_reader :sync
     attr_reader :memory
     attr_reader :cpus
@@ -34,7 +36,7 @@ def define(config, base_name, name)
         attributes = JSON.parse(File.read("attributes/#{name}.json"))
         provision['ports'].each { |port| port(service, port['guest'], port['host']) }
         synced_folder = SyncedFolder.new(name, "src/#{name}", "/data/#{name}", provision['mount_options'])
-        machine = MachineConfig.new("#{base_name}-#{name}", synced_folder, provision['memory'], provision['cpus'])
+        machine = MachineConfig.new("#{base_name}-#{name}", synced_folder, provision['box'], provision['memory'], provision['cpus'])
         provision(service, machine, provision['runlist'], attributes)
     end
 end
@@ -83,7 +85,7 @@ end
 
 # method to setup virtual machine
 def setup(app, machine)
-    app.vm.box = 'centos/6'
+    app.vm.box = machine.box
     app.vm.hostname = machine.name
     app.vm.provider :virtualbox do |vb|
         vb.customize ['modifyvm', :id, '--cpuexecutioncap', '50']
