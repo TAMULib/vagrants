@@ -32,9 +32,6 @@
     },
     "nodejs": {
         "install_method": "binary",
-        "version": "7.4.0",
-        "npm_packages": [{
-            "name": "bower"
-        }]
+        "version": "7.4.0"
     }
 }
