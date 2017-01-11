@@ -5,7 +5,9 @@
     }],
     "mount_options": [
         "dmode=777",
-        "fmode=666"
+        "fmode=777",
+        "uid=312",
+        "gid=312"
     ],
     "box": "centos/6",
     "memory": 2024,

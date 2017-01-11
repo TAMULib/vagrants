@@ -4,9 +4,9 @@ TAMU project development chef_client provisioning vagrants.
 
 ## dependencies
 
-1. [virtual box](https://www.virtualbox.org/wiki/Downloads) >= v5.1.12
-2. [chef client](https://downloads.chef.io/chef) >= v12.15.19
-3. [vagrant](https://www.vagrantup.com/downloads.html) >= v1.9.1
+1. [virtual box](https://www.virtualbox.org/wiki/Downloads)
+2. [chef client](https://downloads.chef.io/chef)
+3. [vagrant](https://www.vagrantup.com/downloads.html)
 
 ## vagrant plugins
 
@@ -52,7 +52,7 @@ Optional, configure Apache proxy using a VirtualHost ProxyPass to port 8080.
       </VirtualHost>
     ```
 
-4. restart Apache
+4. Restart Apache
 
 ## deploy
 

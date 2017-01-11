@@ -11,15 +11,12 @@ VAGRANTFILE_API_VERSION = '2'.freeze
 # this makes the assumption the .chef directory is located in the users home directory
 Chef::Config.from_file(File.join(File.expand_path('~'), '.chef', 'knife.rb'))
 
-# matches chef 11 development server
-$chef_version = '11.18.12'
-
 # set base name to host machine name hyphen app name
 $base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + '-subject-librarian'
 
 Vagrant.configure('2') do |config|
-    # set omnibus chef version from global variable
-    config.omnibus.chef_version = $chef_version
+    # set omnibus chef version to match chef server
+    config.omnibus.chef_version = '11.18.12'
 
     # disable berkshelf
     config.berkshelf.enabled = false
