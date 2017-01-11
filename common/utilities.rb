@@ -24,7 +24,7 @@ def provision(app, machine, runlist, attrubutes)
     setup(app, machine)
 
     # create synced folder for development
-    app.vm.synced_folder "src/#{machine.sync.src}", "/data/#{machine.sync.dest}",
+    app.vm.synced_folder machine.sync.src.to_s, machine.sync.dest.to_s,
                          id: machine.sync.name, create: true,
                          mount_options: machine.sync.mount_options,
                          owner: machine.sync.owner,
