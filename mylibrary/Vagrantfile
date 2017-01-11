@@ -51,7 +51,7 @@ Vagrant.configure('2') do |config|
         owner = attributes['angular']['user_id']
         group = attributes['angular']['group_id']
         app_name = attributes['angular']['app']['name']
-        synced_folder = SyncedFolder.new($ui, "src/#{$ui}", "/data/#{$ui}/#{app_name}", ['dmode=777', 'fmode=666'], owner, group)
+        synced_folder = SyncedFolder.new($ui, "src/#{$ui}", "/data/#{$ui}", ['dmode=777', 'fmode=666'], owner, group)
         machine_name = "#{$base_name}-#{$ui}"
         machine = MachineConfig.new(machine_name, synced_folder)
         provision(ui, machine, runlist, attributes)

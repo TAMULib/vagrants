@@ -34,8 +34,5 @@
         "dist": {
             "uri": "http://archive.apache.org/dist/"
         }
-    },
-    "voyager": {
-        "primary_host": "surprise.tamu.edu"
     }
 }
