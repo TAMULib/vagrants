@@ -11,21 +11,15 @@ VAGRANTFILE_API_VERSION = '2'.freeze
 # this makes the assumption the .chef directory is located in the users home directory
 Chef::Config.from_file(File.join(File.expand_path('~'), '.chef', 'knife.rb'))
 
-# set base name to host machine name hyphen app name
+# set global base name to host machine name hyphen app name
 $base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + '-directory'
 
 Vagrant.configure('2') do |config|
-    # set omnibus chef version to match chef server
-    config.omnibus.chef_version = '11.18.12'
-
-    # disable berkshelf
-    config.berkshelf.enabled = false
-
     # provision ui
-    define(config, $base_name, 'angular')
+    define(config, 'angular')
 
     # provision service
-    define(config, $base_name, 'spring')
+    define(config, 'spring')
 
     # clean up files on the host after the guest is destroyed
     cleanup(config)

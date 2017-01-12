@@ -30,13 +30,20 @@ class SyncedFolder
 end
 
 # method to define the chef provisioning
-def define(config, base_name, name)
+def define(config, name)
+    # set omnibus chef version to match chef server
+    config.omnibus.chef_version = '11.18.12'
+
+    # disable berkshelf
+    config.berkshelf.enabled = false
+
+    # define to provisioning
     config.vm.define name do |app|
         provision = JSON.parse(File.read("provision/#{name}.json"))
         attributes = JSON.parse(File.read("attributes/#{name}.json"))
         provision['ports'].each { |port| port(app, port['guest'], port['host']) }
         synced_folder = SyncedFolder.new(name, "src/#{name}", "/data/#{name}", provision['mount_options'])
-        machine = MachineConfig.new("#{base_name}-#{name}", synced_folder, provision['box'], provision['memory'], provision['cpus'])
+        machine = MachineConfig.new("#{$base_name}-#{name}", synced_folder, provision['box'], provision['memory'], provision['cpus'])
         provision(app, machine, provision['runlist'], attributes)
     end
 end
@@ -51,8 +58,8 @@ def provision(app, machine, runlist, attributes)
     # configure settings
     setup(app, machine)
 
-    # sync directory
-    sync(app, machine)
+    # sync directory, currently breaks npm install!!!
+    # sync(app, machine)
 
     # copy ssh key for git clone
     app.vm.provision 'file', source: (ENV['SSH_ID_RSA']).to_s,
