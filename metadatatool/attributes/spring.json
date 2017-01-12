@@ -19,7 +19,7 @@
                 "user": "sa",
                 "platform": "org.hibernate.dialect.H2Dialect"
             },
-            "deploy": "master"
+            "deploy": "upgrade"
         }
     },
     "lib-iptables": {

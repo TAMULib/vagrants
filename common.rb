@@ -51,10 +51,8 @@ def provision(app, machine, runlist, attributes)
     # configure settings
     setup(app, machine)
 
-    # create synced folder using nfs for development
-    app.vm.synced_folder machine.sync.src.to_s, machine.sync.dest.to_s,
-                         id: machine.sync.name, create: true,
-                         mount_options: machine.sync.mount_options
+    # sync directory
+    sync(app, machine)
 
     # copy ssh key for git clone
     app.vm.provision 'file', source: (ENV['SSH_ID_RSA']).to_s,
@@ -63,7 +61,7 @@ def provision(app, machine, runlist, attributes)
     # perform chef provision
     app.vm.provision :chef_client do |chef|
         chef.node_name = machine.name
-        chef.version = $chef_version
+        chef.version = '11.18.12'
 
         chef.log_level = Chef::Config[:log_level]
         chef.verbose_logging = Chef::Config[:verbose_logging]
@@ -96,9 +94,18 @@ def setup(app, machine)
     end
 end
 
+# method to create synced folder and bind to source folder
+def sync(app, machine)
+    # create synced folder for development
+    app.vm.synced_folder machine.sync.src.to_s, machine.sync.dest.to_s,
+                         id: machine.sync.name, create: true,
+                         mount_options: machine.sync.mount_options
+end
+
 # method to clean up files on the host after the guest is destroyed
-def cleanup(config)
-    config.trigger.after :destroy do
+def cleanup(app)
+    # add trigger for when destroy is called
+    app.trigger.after :destroy do
         run 'rm -rf src/'
     end
 end
