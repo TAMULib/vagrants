@@ -11,8 +11,10 @@ VAGRANTFILE_API_VERSION = '2'.freeze
 # this makes the assumption the .chef directory is located in the users home directory
 Chef::Config.from_file(File.join(File.expand_path('~'), '.chef', 'knife.rb'))
 
+$app_name = 'mylibrary'
+
 # set global base name to host machine name hyphen app name
-$base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + '-mylibrary'
+$base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + "-#{$app_name}"
 
 Vagrant.configure('2') do |config|
     # provision ui

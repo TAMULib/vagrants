@@ -60,9 +60,16 @@ def provision(app, machine, provision, attributes)
 
     # sync directory
     if attributes['angular']
-    # currently breaks npm install!!!
+        # currently breaks npm install!!!
+        # sync(app, machine)
+
+        # add trigger for after up is called
+        app.trigger.after :up do
+            # configure selinux for webapp public direcrtory and reboot
+            run_remote "chcon -t httpd_sys_content_t -R /var/www/#{$app_name} && reboot"
+        end
     else
-      sync(app, machine)
+        sync(app, machine)
     end
 
     # copy ssh key for git clone
