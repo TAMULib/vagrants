@@ -9,7 +9,7 @@
         "uid=312",
         "gid=312"
     ],
-    "box": "centos/7",
+    "box": "centos/6",
     "memory": 2024,
     "cpus": 2,
     "runlist": [
