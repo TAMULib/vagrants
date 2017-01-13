@@ -59,17 +59,13 @@ def provision(app, machine, provision, attributes)
     setup(app, machine)
 
     # sync directory
-    if attributes['angular']
-        # currently breaks npm install!!!
-        # sync(app, machine)
+    sync(app, machine)
 
-        # add trigger for after up is called
+    if attributes['angular']
         app.trigger.after :up do
-            # configure selinux for webapp public direcrtory and reboot
-            run_remote "sudo chcon -t httpd_sys_content_t -R /var/www/#{$app_name}"
+            # configure selinux for webapp public direcrtory
+            app.vm.provision 'shell', inline:  "sudo chcon -t httpd_sys_content_t -R /var/www/#{$app_name}"
         end
-    else
-        sync(app, machine)
     end
 
     # copy ssh key for git clone
@@ -118,6 +114,9 @@ def sync(app, machine)
     app.vm.synced_folder machine.sync.src.to_s, machine.sync.dest.to_s,
                          id: machine.sync.name, create: true,
                          mount_options: machine.sync.mount_options
+
+    # configure selinux for the synced directory
+    app.vm.provision 'shell', inline: 'sudo chcon -t httpd_sys_content_t /data'
 end
 
 # method to clean up files on the host after the guest is destroyed
