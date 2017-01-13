@@ -13,7 +13,6 @@
     },
     "angular": {
         "app": {
-            "port": 80,
             "name": "subject-librarian",
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
             "deploy": "upgrade",

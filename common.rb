@@ -58,8 +58,12 @@ def provision(app, machine, runlist, attributes)
     # configure settings
     setup(app, machine)
 
-    # sync directory, currently breaks npm install!!!
-    # sync(app, machine)
+    # sync directory
+    if attributes['angular']
+    # currently breaks npm install!!!
+    else
+      sync(app, machine)
+    end
 
     # copy ssh key for git clone
     app.vm.provision 'file', source: (ENV['SSH_ID_RSA']).to_s,

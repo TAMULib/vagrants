@@ -15,9 +15,10 @@
         "app": {
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
             "db": {
+                "in_mem": true,
                 "driver": "org.h2.Driver",
-                "user": "sa",
-                "platform": "org.hibernate.dialect.H2Dialect"
+                "platform": "org.hibernate.dialect.H2Dialect",
+                "user": "sa"
             },
             "deploy": "upgrade"
         }

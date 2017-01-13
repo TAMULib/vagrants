@@ -13,7 +13,6 @@
     },
     "angular": {
         "app": {
-            "port": 80,
             "name": "mylibrary",
             "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
             "framework": {
