@@ -29,6 +29,9 @@
             ]
         }
     },
+    "apache": {
+        "version": "2.2"
+    },
     "nodejs": {
         "install_method": "binary",
         "version": "7.4.0",

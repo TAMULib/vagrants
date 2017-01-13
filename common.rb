@@ -44,7 +44,7 @@ def define(config, name)
         provision['ports'].each { |port| port(app, port['guest'], port['host']) }
         synced_folder = SyncedFolder.new(name, "src/#{name}", "/data/#{name}", provision['mount_options'])
         machine = MachineConfig.new("#{$base_name}-#{name}", synced_folder, provision['box'], provision['memory'], provision['cpus'])
-        provision(app, machine, provision['runlist'], attributes)
+        provision(app, machine, provision, attributes)
     end
 end
 
@@ -54,7 +54,7 @@ def port(app, guest, host, protocol = 'tcp')
 end
 
 # method to perform detailed chef provisioning
-def provision(app, machine, runlist, attributes)
+def provision(app, machine, provision, attributes)
     # configure settings
     setup(app, machine)
 
@@ -87,7 +87,7 @@ def provision(app, machine, runlist, attributes)
 
         chef.delete_node = true
         chef.delete_client = true
-        chef.run_list = runlist
+        chef.run_list = provision['runlist']
         chef.json = attributes
     end
 end
@@ -115,7 +115,7 @@ end
 
 # method to clean up files on the host after the guest is destroyed
 def cleanup(app)
-    # add trigger for when destroy is called
+    # add trigger for after destroy is called
     app.trigger.after :destroy do
         run 'rm -rf src/'
     end
