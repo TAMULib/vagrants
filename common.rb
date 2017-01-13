@@ -66,7 +66,7 @@ def provision(app, machine, provision, attributes)
         # add trigger for after up is called
         app.trigger.after :up do
             # configure selinux for webapp public direcrtory and reboot
-            run_remote "chcon -t httpd_sys_content_t -R /var/www/#{$app_name} && reboot"
+            run_remote "sudo chcon -t httpd_sys_content_t -R /var/www/#{$app_name}"
         end
     else
         sync(app, machine)
