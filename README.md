@@ -27,7 +27,7 @@ TAMU project development chef_client provisioning vagrants.
 - export environment variable, CHEF_CLIENT_PEM, to locate chef client pem file
   - ```export CHEF_CLIENT_PEM="/etc/chef/client.pem"```
 - update vagrant box for centos 7
-  - ```vagrant box update --box centos/7```
+  - ```vagrant box update --box bento/centos-6.7"```
 
 ## configure
 

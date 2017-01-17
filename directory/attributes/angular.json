@@ -1,48 +1,45 @@
 {
-    "testKitchen": false,
-    "hipchat": {
-        "nickname": "Vagrant",
-        "notify": false,
-        "token": "6220b0d589fc771b5105aff76017ee",
-        "rooms": {
-            "default": {
-                "name": "Local Dev Notifications",
-                "color": "green"
-            }
-        }
-    },
-    "angular": {
-        "app": {
-            "name": "directory",
-            "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
-            "deploy": "upgrade",
-            "conf": {
-                "authService_host": "https://labs.library.tamu.edu/auth2",
-                "webService_host": "http://localhost:9002"
-            }
-        }
-    },
-    "lib-iptables": {
-        "open-ports": {
-            "tcp": [
-                80
-            ]
-        }
-    },
-    "apache": {
-        "version": "2.2"
-    },
-    "nodejs": {
-        "install_method": "binary",
-        "version": "7.4.0",
-        "npm_packages": [{
-            "name": "npm"
-        }, {
-            "name": "bower"
-        }, {
-            "name": "grunt"
-        }, {
-            "name": "npm-check-updates"
-        }]
+  "testKitchen": false,
+  "hipchat": {
+    "nickname": "Vagrant",
+    "notify": false,
+    "token": "6220b0d589fc771b5105aff76017ee",
+    "rooms": {
+      "default": {
+        "name": "Local Dev Notifications",
+        "color": "green"
+      }
     }
+  },
+  "angular": {
+    "app": {
+      "name": "directory",
+      "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
+      "deploy": "upgrade",
+      "conf": {
+        "authService_host": "https://labs.library.tamu.edu/auth2",
+        "webService_host": "http://localhost:9002"
+      }
+    }
+  },
+  "lib-iptables": {
+    "open-ports": {
+      "tcp": [
+        80
+      ]
+    }
+  },
+  "nodejs": {
+    "install_method": "binary",
+    "version": "7.4.0",
+    "npm_packages": [{
+      "name": "npm"
+    }, {
+      "name": "bower"
+    }, {
+      "name": "grunt"
+    }, {
+      "name": "npm-check-updates"
+    }]
+  }
 }

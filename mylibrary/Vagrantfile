@@ -17,12 +17,12 @@ $app_name = 'mylibrary'
 $base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + "-#{$app_name}"
 
 Vagrant.configure('2') do |config|
-    # provision ui
-    define(config, 'angular')
+  # provision ui
+  define(config, 'angular')
 
-    # provision service
-    define(config, 'spring')
+  # provision service
+  define(config, 'spring')
 
-    # clean up files on the host after the guest is destroyed
-    cleanup(config)
+  # clean up files on the host after the guest is destroyed
+  cleanup(config)
 end

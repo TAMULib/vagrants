@@ -1,43 +1,43 @@
 {
-    "testKitchen": false,
-    "hipchat": {
-        "nickname": "Vagrant",
-        "notify": false,
-        "token": "6220b0d589fc771b5105aff76017ee",
-        "rooms": {
-            "default": {
-                "name": "Local Dev Notifications",
-                "color": "green"
-            }
-        }
-    },
-    "spring": {
-        "app": {
-            "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
-            "no_db": true,
-            "db": {
-                "ms": "h2",
-                "in_mem": true,
-                "driver": "org.h2.Driver",
-                "platform": "org.hibernate.dialect.H2Dialect",
-                "url": "jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
-                "user": "sa",
-                "ddl": "create-drop"
-            },
-            "deploy": "upgrade"
-        }
-    },
-    "lib-iptables": {
-        "open-ports": {
-            "tcp": [
-                9004
-            ]
-        }
-    },
-    "tomcat": {
-        "port": 9004,
-        "dist": {
-            "uri": "http://archive.apache.org/dist/"
-        }
+  "testKitchen": false,
+  "hipchat": {
+    "nickname": "Vagrant",
+    "notify": false,
+    "token": "6220b0d589fc771b5105aff76017ee",
+    "rooms": {
+      "default": {
+        "name": "Local Dev Notifications",
+        "color": "green"
+      }
     }
+  },
+  "spring": {
+    "app": {
+      "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
+      "no_db": true,
+      "db": {
+        "ms": "h2",
+        "in_mem": true,
+        "driver": "org.h2.Driver",
+        "platform": "org.hibernate.dialect.H2Dialect",
+        "url": "jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
+        "user": "sa",
+        "ddl": "create-drop"
+      },
+      "deploy": "upgrade"
+    }
+  },
+  "lib-iptables": {
+    "open-ports": {
+      "tcp": [
+        9004
+      ]
+    }
+  },
+  "tomcat": {
+    "port": 9004,
+    "dist": {
+      "uri": "http://archive.apache.org/dist/"
+    }
+  }
 }

@@ -1,18 +1,18 @@
 {
-    "ports": [{
-        "guest": 80,
-        "host": 8080
-    }],
-    "mount_options": [
-        "dmode=777",
-        "fmode=777",
-        "uid=312",
-        "gid=312"
-    ],
-    "box": "centos/6",
-    "memory": 2024,
-    "cpus": 2,
-    "runlist": [
-        "recipe[directory-ui::default@0.2.3]"
-    ]
+  "ports": [{
+    "guest": 80,
+    "host": 8080
+  }],
+  "mount_options": [
+    "dmode=777",
+    "fmode=777",
+    "uid=312",
+    "gid=312"
+  ],
+  "box": "bento/centos-6.7",
+  "memory": 2024,
+  "cpus": 2,
+  "runlist": [
+    "recipe[directory-ui::default@0.2.3]"
+  ]
 }

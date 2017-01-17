@@ -1,17 +1,17 @@
 {
-    "ports": [{
-        "guest": 9004,
-        "host": 9004
-    }],
-    "mount_options": [
-        "dmode=777",
-        "fmode=777"
-    ],
-    "box": "centos/6",
-    "memory": 2024,
-    "cpus": 2,
-    "runlist": [
-        "recipe[git]",
-        "recipe[mylibrary::default@0.7.0]"
-    ]
+  "ports": [{
+    "guest": 9004,
+    "host": 9004
+  }],
+  "mount_options": [
+    "dmode=777",
+    "fmode=777"
+  ],
+  "box": "bento/centos-6.7",
+  "memory": 2024,
+  "cpus": 2,
+  "runlist": [
+    "recipe[git]",
+    "recipe[mylibrary::default@0.7.0]"
+  ]
 }

@@ -15,9 +15,9 @@ Chef::Config.from_file(File.join(File.expand_path('~'), '.chef', 'knife.rb'))
 $base_name = (`hostname`[0..-2]).to_s.sub(/\..*$/, '') + '-pelican'
 
 Vagrant.configure('2') do |config|
-    # provision service
-    define(config, 'spring')
+  # provision service
+  define(config, 'spring')
 
-    # clean up files on the host after the guest is destroyed
-    cleanup(config)
+  # clean up files on the host after the guest is destroyed
+  cleanup(config)
 end
