@@ -61,15 +61,10 @@ def provision(app, machine, provision, attributes)
   setup(app, machine)
 
   # sync directory
-  if attributes['angular']
-    # npm install fails within synced directory
-  else
-    sync(app, machine)
-  end
+  sync(app, machine)
 
   # copy ssh key for git clone
-  app.vm.provision 'file', source: (ENV['SSH_ID_RSA']).to_s,
-                           destination: '/home/vagrant/.ssh/git_id_rsa'
+  gitssh(app)
 
   # perform chef provision
   app.vm.provision :chef_client do |chef|
@@ -105,6 +100,12 @@ def setup(app, machine)
     vb.memory = machine.memory
     vb.cpus = machine.cpus
   end
+end
+
+# method to copy developers ssh key for git clone
+def gitssh(app)
+  app.vm.provision 'file', source: (ENV['SSH_ID_RSA']).to_s,
+                           destination: '/home/vagrant/.ssh/git_id_rsa'
 end
 
 # method to create synced folder and bind to source folder

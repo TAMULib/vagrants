@@ -24,7 +24,8 @@
         "authService_host": "https://labs.library.tamu.edu/auth2",
         "webService_host": "http://localhost:9004"
       }
-    }
+    },
+    "npm_flags": "--no-bin-links"
   },
   "lib-iptables": {
     "open-ports": {
@@ -35,7 +36,7 @@
   },
   "nodejs": {
     "install_method": "binary",
-    "version": "7.4.0",
+    "version": "7.2.0",
     "npm_packages": [{
       "name": "npm"
     }, {
