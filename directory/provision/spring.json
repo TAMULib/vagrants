@@ -1,0 +1,17 @@
+{
+  "ports": [{
+    "guest": 9002,
+    "host": 9002
+  }],
+  "mount_options": [
+    "dmode=777",
+    "fmode=777"
+  ],
+  "box": "bento/centos-6.7",
+  "memory": 2024,
+  "cpus": 2,
+  "runlist": [
+    "recipe[git]",
+    "recipe[directory-service::default@0.2.1]"
+  ]
+}

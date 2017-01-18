@@ -1,0 +1,17 @@
+{
+  "ports": [{
+    "guest": 9001,
+    "host": 9001
+  }],
+  "mount_options": [
+    "dmode=777",
+    "fmode=777"
+  ],
+  "box": "bento/centos-6.7",
+  "memory": 2024,
+  "cpus": 2,
+  "runlist": [
+    "recipe[lib-tomcat]",
+    "recipe[pelican::default@0.2.0]"
+  ]
+}

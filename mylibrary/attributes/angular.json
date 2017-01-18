@@ -1,0 +1,50 @@
+{
+  "testKitchen": false,
+  "hipchat": {
+    "nickname": "Vagrant",
+    "notify": false,
+    "token": "6220b0d589fc771b5105aff76017ee",
+    "rooms": {
+      "default": {
+        "name": "Local Dev Notifications",
+        "color": "green"
+      }
+    }
+  },
+  "angular": {
+    "app": {
+      "name": "mylibrary",
+      "keyurl": "file:///home/vagrant/.ssh/git_id_rsa",
+      "framework": {
+        "enabled": true,
+        "keyurl": "file:///home/vagrant/.ssh/git_id_rsa"
+      },
+      "deploy": "upgrade",
+      "conf": {
+        "authService_host": "https://labs.library.tamu.edu/auth2",
+        "webService_host": "http://localhost:9004"
+      }
+    },
+    "npm_flags": "--no-bin-links"
+  },
+  "lib-iptables": {
+    "open-ports": {
+      "tcp": [
+        80
+      ]
+    }
+  },
+  "nodejs": {
+    "install_method": "binary",
+    "version": "7.2.0",
+    "npm_packages": [{
+      "name": "npm"
+    }, {
+      "name": "bower"
+    }, {
+      "name": "grunt"
+    }, {
+      "name": "npm-check-updates"
+    }]
+  }
+}
