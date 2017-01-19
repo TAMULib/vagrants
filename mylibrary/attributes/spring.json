@@ -30,12 +30,12 @@
   "lib-iptables": {
     "open-ports": {
       "tcp": [
-        9004
+        9000
       ]
     }
   },
   "tomcat": {
-    "port": 9004,
+    "port": 9000,
     "dist": {
       "uri": "http://archive.apache.org/dist/"
     }

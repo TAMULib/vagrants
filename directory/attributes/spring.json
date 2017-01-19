@@ -26,19 +26,19 @@
       },
       "deploy": "upgrade",
       "conf": {
-        "subjectapp": "http://localhost:9003"
+        "subjectapp": "http://localhost:9002"
       }
     }
   },
   "lib-iptables": {
     "open-ports": {
       "tcp": [
-        9002
+        9000
       ]
     }
   },
   "tomcat": {
-    "port": 9002,
+    "port": 9000,
     "dist": {
       "uri": "http://archive.apache.org/dist/"
     }

@@ -1,7 +1,7 @@
 {
   "ports": [{
     "guest": 80,
-    "host": 8080
+    "host": 8082
   }],
   "mount_options": [
     "dmode=777",

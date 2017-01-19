@@ -1,7 +1,7 @@
 {
   "ports": [{
-    "guest": 9002,
-    "host": 9002
+    "guest": 9000,
+    "host": 9001
   }],
   "mount_options": [
     "dmode=777",

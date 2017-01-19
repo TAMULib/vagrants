@@ -68,3 +68,31 @@ Deploy will create, configure, provision, and start VMs with the associating pro
 1. ```vagrant destroy```
 
 Cleanup will delete and remove the VMs, delete the host shared directory, and delete the node and client on the chef server
+
+## Projects
+
+Here are some default host ports for various projects.
+
+### [MyLibrary](https://github.com/TAMULib/vagrants/tree/master/mylibrary)
+
+  Service: 9000
+  UI: 8080
+
+### [Direcory](https://github.com/TAMULib/vagrants/tree/master/directory)
+
+  Service: 9001
+  UI: 8081
+
+### [Subject Librarian](https://github.com/TAMULib/vagrants/tree/master/subject-librarian)
+
+  Service: 9002
+  UI: 8082
+
+### [Magpie](https://github.com/TAMULib/vagrants/tree/master/metadatatool)
+
+  Service: 9003
+  UI: 8083
+
+### [Pelican](https://github.com/TAMULib/vagrants/tree/master/pelican)
+
+  Service: 9004

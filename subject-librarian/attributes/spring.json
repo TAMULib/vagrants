@@ -27,7 +27,7 @@
       "deploy": "upgrade",
       "conf": {
         "directory": {
-          "uri": "http://localhost:9002/ldap"
+          "uri": "http://localhost:9001/ldap"
         }
       }
     }
@@ -35,12 +35,12 @@
   "lib-iptables": {
     "open-ports": {
       "tcp": [
-        9003
+        9000
       ]
     }
   },
   "tomcat": {
-    "port": 9003,
+    "port": 9000,
     "dist": {
       "uri": "http://archive.apache.org/dist/"
     }
