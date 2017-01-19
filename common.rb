@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+$chef_version = '11.18.12'
+
 class MachineConfig
   def initialize(name, sync, box, memory, cpus)
     @name = name
@@ -32,7 +34,7 @@ end
 # method to define the chef provisioning
 def define(config, name)
   # set omnibus chef version to match chef server
-  config.omnibus.chef_version = '11.18.12'
+  config.omnibus.chef_version = $chef_version
 
   # disable auto update to avoid vbguest conlicts
   config.vbguest.auto_update = false
@@ -70,7 +72,7 @@ def provision(app, machine, provision, attributes)
   # perform chef provision
   app.vm.provision :chef_client do |chef|
     chef.node_name = machine.name
-    chef.version = '11.18.12'
+    chef.version = $chef_version
 
     chef.log_level = Chef::Config[:log_level]
     chef.verbose_logging = Chef::Config[:verbose_logging]
