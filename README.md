@@ -75,32 +75,42 @@ Here are some default host ports for various projects.
 
 ### [MyLibrary](https://github.com/TAMULib/vagrants/tree/master/mylibrary)
 
-- Service: 9000
-- UI: 8080
+| Service | Port |
+| ------- | ---: |
+| spring  | 9000 |
+| angular | 8080 |
 
 - - - -
 
 ### [Direcory](https://github.com/TAMULib/vagrants/tree/master/directory)
 
-- Service: 9001
-- UI: 8081
+| Service | Port |
+| ------- | ---: |
+| spring  | 9001 |
+| angular | 8081 |
 
 - - - -
 
 ### [Subject Librarian](https://github.com/TAMULib/vagrants/tree/master/subject-librarian)
 
-- Service: 9002
-- UI: 8082
+| Service | Port |
+| ------- | ---: |
+| spring  | 9002 |
+| angular | 8082 |
 
 - - - -
 
 ### [Magpie](https://github.com/TAMULib/vagrants/tree/master/metadatatool)
 
-- Service: 9003
-- UI: 8083
+| Service | Port |
+| ------- | ---: |
+| spring  | 9003 |
+| angular | 8083 |
 
 - - - -
 
 ### [Pelican](https://github.com/TAMULib/vagrants/tree/master/pelican)
 
-- Service: 9004
+| Service | Port |
+| ------- | ---: |
+| spring  | 9004 |
