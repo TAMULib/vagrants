@@ -34,6 +34,7 @@ def define(config, name)
   # set omnibus chef version to match chef server
   config.omnibus.chef_version = '11.18.12'
 
+  # disable auto update to avoid vbguest conlicts
   config.vbguest.auto_update = false
 
   # disable berkshelf
