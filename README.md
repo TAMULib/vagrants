@@ -69,7 +69,7 @@ Deploy will create, configure, provision, and start VMs with the associating pro
 
 Cleanup will delete and remove the VMs, delete the host shared directory, and delete the node and client on the chef server
 
-## Projects
+## projects
 
 Here are some default host ports for various projects.
 
