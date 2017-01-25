@@ -29,7 +29,7 @@
         "pelicanUrl": "http://localhost:9004/nalt/suggestions"
       },
       "security": {
-        "allow_access": ["http://localhost:9003"]
+        "allow_access": ["http://localhost:8083"]
       }
     }
   },

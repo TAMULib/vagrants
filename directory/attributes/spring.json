@@ -29,7 +29,7 @@
         "subjectapp": "http://localhost:9002"
       },
       "security": {
-        "allow_access": ["http://localhost:9001"]
+        "allow_access": ["http://localhost:8081"]
       }
     }
   },

@@ -26,7 +26,7 @@
       },
       "deploy": "upgrade",
       "security": {
-        "allow_access": ["http://localhost:9000"]
+        "allow_access": ["http://localhost:8080"]
       }
     }
   },
