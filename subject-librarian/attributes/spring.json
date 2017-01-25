@@ -29,6 +29,9 @@
         "directory": {
           "uri": "http://localhost:9001/ldap"
         }
+      },
+      "security": {
+        "allow_access": ["http://localhost:9002"]
       }
     }
   },
