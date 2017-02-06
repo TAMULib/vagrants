@@ -82,8 +82,18 @@ def provision(app, machine, provision, attributes)
     chef.validation_client_name = Chef::Config[:validation_client_name]
 
     # install location of the chef client
-    chef.provisioning_path = (ENV['CHEF_HOME']).to_s
-    chef.client_key_path = (ENV['CHEF_CLIENT_PEM']).to_s
+	#
+	# I have tried all sorts of variations to have this work
+	# but I have not gottent it.  Only solution I have is to ensure the 
+	# env is set correctly and just not set these parameters.
+	#
+	# with the github key excluding the .to_s semed to resolve that issue 
+	# instead of excluding them.  DCH 2/6/17
+	
+	if (ENV['OS'] != 'Windows_NT')
+		chef.provisioning_path = (ENV['CHEF_HOME']).to_s
+		chef.client_key_path = (ENV['CHEF_CLIENT_PEM']).to_s
+	end		
 
     chef.delete_node = true
     chef.delete_client = true
@@ -107,8 +117,15 @@ end
 
 # method to copy developers ssh key for git clone
 def gitssh(app)
-  app.vm.provision 'file', source: (ENV['SSH_ID_RSA']).to_s,
-                           destination: '/home/vagrant/.ssh/git_id_rsa'
+
+	if (ENV['OS'] != 'Windows_NT')
+		app.vm.provision 'file', source: (ENV['SSH_ID_RSA']).to_s,
+		destination: '/home/vagrant/.ssh/git_id_rsa'
+	else 
+		app.vm.provision 'file', source: (ENV['SSH_ID_RSA']),
+		destination: '/home/vagrant/.ssh/git_id_rsa'
+	end
+	
 end
 
 # method to create synced folder and bind to source folder

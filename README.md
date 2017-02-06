@@ -16,6 +16,8 @@ TAMU project development chef_client provisioning vagrants.
 - ```vagrant plugin install vagrant-vbguest```
 - ```vagrant plugin install vagrant-triggers```
 
+```vagrant plugin list```  will show installed plugins
+
 ## setup
 
 - generate ssh key and register with github account
