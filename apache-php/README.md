@@ -23,22 +23,33 @@ In my local application I used a local MySQL install that is accessed from the V
 - ```c:\vagrantboxes\chef\roles\apache-php.rb <- Role File```
 
 create directory c:\vagrantboxes\apache-php
+
 copy Vagrantfile to c:\vagrantboxes\apache-php
+
 copy Berksfile to c:\vagrantboxes\apache-php
+
 change directory to c:\vagrantboxes\apache-php
+
 run berks vendor ../chef/cookbooks/ <- this will download cookbooks needed to c:\vagrantboxes\chef\cookbooks
+
 vagrant up
+
 vagrant ssh will ssh you into the box
+
 vagrant provision will re-rerun chef
+
 vagrant destroy will start over.
 
 For Apache you need to change the node definition to have "tags": [ "fresh_install" ] to re-deploy.
 
 Things to check or change
+
 In the Berksfile
+
 Check the cookbooks needed and where to find them
 
 In the Vagrantfile
+
 Check the variables
 Node and Role definition
 check the sync folders
