@@ -1,0 +1,12 @@
+source 'https://supermarket.chef.io'
+source :chef_server
+
+# Use Local cookbook path and not one on chef server
+# Local cookbook has modifications that are not uploaded yet
+
+cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
+
+# I could have just used this to pull it from our local chef server
+# which is defined in your local knife.rb
+
+#cookbook 'tl_app'
