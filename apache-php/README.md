@@ -11,11 +11,11 @@ From a Vagrant box to access your local box use IP 10.0.2.2
 In my local application I used a local MySQL install that is accessed from the Vagrant box.
  
 # Here is my directory and file structure that I used
-c:\vagrantboxes\apache-php\
-c:\vagrantboxes\chef\cookbooks\
-c:\vagrantboxes\chef\nodes\
-c:\vagrantboxes\chef\roles\
-c:\vagrantboxes\chef\html\
+- ```c:\vagrantboxes\apache-php\```
+- ```c:\vagrantboxes\chef\cookbooks\```
+- ```c:\vagrantboxes\chef\nodes\```
+- ```c:\vagrantboxes\chef\roles\```
+- ```c:\vagrantboxes\chef\html\```
 
 - ```c:\vagrantboxes\apache-php\Berksfile <- Berks File```
 - ```c:\vagrantboxes\apache-php\Vagrantfile <- Vagrant File```
@@ -31,10 +31,13 @@ vagrant up
 vagrant ssh will ssh you into the box
 vagrant provision will re-rerun chef
 vagrant destroy will start over.
+
 For Apache you need to change the node definition to have "tags": [ "fresh_install" ] to re-deploy.
+
 Things to check or change
 In the Berksfile
 Check the cookbooks needed and where to find them
+
 In the Vagrantfile
 Check the variables
 Node and Role definition
