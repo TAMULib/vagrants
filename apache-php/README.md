@@ -17,10 +17,10 @@ c:\vagrantboxes\chef\nodes\
 c:\vagrantboxes\chef\roles\
 c:\vagrantboxes\chef\html\
 
-c:\vagrantboxes\apache-php\Berksfile <- Berks File
-c:\vagrantboxes\apache-php\Vagrantfile <- Vagrant File
-c:\vagrantboxes\chef\nodes\apache-php.json <- Node File
-c:\vagrantboxes\chef\roles\apache-php.rb <- Role File
+- ```c:\vagrantboxes\apache-php\Berksfile <- Berks File```
+- ```c:\vagrantboxes\apache-php\Vagrantfile <- Vagrant File```
+- ```c:\vagrantboxes\chef\nodes\apache-php.json <- Node File```
+- ```c:\vagrantboxes\chef\roles\apache-php.rb <- Role File```
 
 create directory c:\vagrantboxes\apache-php
 copy Vagrantfile to c:\vagrantboxes\apache-php
