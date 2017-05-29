@@ -10,6 +10,10 @@ default_attributes(
 		'apache' => {
 			'vhost' => {
 				'document_root' => '/data/html',
+			},
+			'global_overrides' => {
+				'EnableMMAP' => 'Off',
+				'EnableSendfile' => 'Off',
 			},			
 		},
 		'php' => {
