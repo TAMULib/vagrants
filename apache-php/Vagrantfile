@@ -1,7 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-
 # defining some variables.  File is so small not really needed.
 $local_chef_stuff_path = "C:\\vagrantboxes/chef"
 $local_cookbooks_path = $local_chef_stuff_path + "/cookbooks/"
@@ -15,7 +14,7 @@ $chef_version = '12.19.33'
 
 $virtual_machine_base = "bento/oracle-7.3"
 
-$vm_sync_folder = "/data/html"
+$vm_sync_folder = "/data/www_root"
 $local_sync_folder = "C:\\data/www_root"
 
 # for this box I map 8080 on the Local machine to port 80 on the virtual machine for use by the www
@@ -23,13 +22,12 @@ $local_sync_folder = "C:\\data/www_root"
 
 # the www document_root is defined / overridden in the role file
 
-
 Vagrant.configure("2") do |config|
 
 	config.vm.box = $virtual_machine_base
 
 	# change add ports
-	config.vm.network "forwarded_port", guest: 8080, host: 80, host_ip: "127.0.0.1", id: 'www'
+	config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "127.0.0.1", id: 'www'
 	
 	# This prob stays the same
 	config.vm.network "forwarded_port", guest: 22, host: 2222, host_ip: "127.0.0.1", id: 'ssh'
@@ -45,6 +43,7 @@ Vagrant.configure("2") do |config|
 		chef.roles_path = $local_roles_path	
 		chef.nodes_path = $local_nodes_path		
 		chef.add_role $local_node_role
+
 		chef.node_name = $local_node_name
 	end
 
