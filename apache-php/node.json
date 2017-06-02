@@ -1,5 +1,5 @@
 {
-  "name": "apache-php",
+  "name": "apache-vagrant-box",
   "normal": {
     "tags": [
 		"fresh_install"

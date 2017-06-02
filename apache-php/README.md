@@ -12,27 +12,23 @@ In my local application I used a local MySQL install that is accessed from the V
  
 # Here is my directory and file structure that I used
 - ```c:\vagrantboxes\apache-php\```
-- ```c:\vagrantboxes\chef\cookbooks\```
-- ```c:\vagrantboxes\chef\nodes\```
-- ```c:\vagrantboxes\chef\roles\```
-- ```c:\vagrantboxes\chef\html\```
 
 - ```c:\vagrantboxes\apache-php\Berksfile <- Berks File```
 - ```c:\vagrantboxes\apache-php\Vagrantfile <- Vagrant File```
-- ```c:\vagrantboxes\chef\nodes\apache-php.json <- Node File```
-- ```c:\vagrantboxes\chef\roles\apache-php.rb <- Role File```
+- ```c:\vagrantboxes\apache-php\node.json <- Node File```
+- ```c:\vagrantboxes\apache-php\role.rb <- Role File```
 
 create directory c:\vagrantboxes\apache-php
-
 copy Vagrantfile to c:\vagrantboxes\apache-php
-
 copy Berksfile to c:\vagrantboxes\apache-php
+copy node.json to c:\vagrantboxes\apache-php
+copy role.rb to c:\vagrantboxes\apache-php
 
 change directory to c:\vagrantboxes\apache-php
 
-run berks vendor ../chef/cookbooks/ <- this will download cookbooks needed to c:\vagrantboxes\chef\cookbooks
+run berks vendor cookbooks/ <- this will download cookbooks needed to c:\vagrantboxes\apache-php\cookbooks
 
-vagrant up
+vagrant up <- this will start up the box
 
 vagrant ssh will ssh you into the box
 
@@ -40,6 +36,9 @@ vagrant provision will re-rerun chef
 
 vagrant destroy will start over.
 
+I setup the node name and role name to a simple default.  These could be any name.  If you change the name
+you need to change it in the Vagrantfile also.
+  
 For Apache you need to change the node definition to have "tags": [ "fresh_install" ] to re-deploy.
 
 Things to check or change

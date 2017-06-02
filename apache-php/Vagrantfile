@@ -2,13 +2,13 @@
 # vi: set ft=ruby :
 
 # defining some variables.  File is so small not really needed.
-$local_chef_stuff_path = "C:\\vagrantboxes/chef"
+$local_chef_stuff_path = "C:\\vagrantboxes/apache-php"
 $local_cookbooks_path = $local_chef_stuff_path + "/cookbooks/"
-$local_roles_path = $local_chef_stuff_path +  "/roles/"	
-$local_nodes_path = $local_chef_stuff_path +  "/nodes/"
+$local_roles_path = $local_chef_stuff_path +  "/"	
+$local_nodes_path = $local_chef_stuff_path +  "/"
 
-$local_node_role = "apache-php"	# Role exists in  $local_roles_path
-$local_node_name = "apache-php" # Node exists in  $local_nodes_path
+$local_node_role = "role"	# Role exists in  $local_roles_path
+$local_node_name = "node" # Node exists in  $local_nodes_path
 
 $chef_version = '12.19.33'
 
