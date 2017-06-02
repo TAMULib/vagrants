@@ -29,6 +29,7 @@ change directory to c:\vagrantboxes\apache-php
 run berks vendor cookbooks/ <- this will download cookbooks needed to c:\vagrantboxes\apache-php\cookbooks
 
 vagrant up <- this will start up the box
+Since I gave the node file a generic name and the file name does not match the name defined in the node file it will create a new file with the name defined in the node file. 
 
 vagrant ssh will ssh you into the box
 

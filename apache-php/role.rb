@@ -1,4 +1,4 @@
-name 'apache-php'
+name 'role'
 description 'Role for Vagrant Apache box using chef12. 
 The omnibus_updater section is is required if using tl_base,
 The tl_firewall section is required if using tl_base,
