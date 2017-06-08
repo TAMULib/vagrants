@@ -41,9 +41,12 @@ Vagrant.configure("2") do |config|
 		chef.version = $chef_version
 		chef.cookbooks_path = $local_cookbooks_path
 		chef.roles_path = $local_roles_path	
-		chef.nodes_path = $local_nodes_path		
-		chef.add_role $local_node_role
+		chef.nodes_path = $local_nodes_path	
 
+		# you can add mutiple roles if needed
+		chef.add_role $local_node_role
+		#
+		
 		chef.node_name = $local_node_name
 	end
 
