@@ -21,7 +21,24 @@ default_attributes(
 			},				
 		},
 		'php' => {
-			'packages' => ['ldap', 'mssql', 'mysqlnd']
-		}
+			'packages' => ['ldap', 'mssql', 'mysqlnd'],
+			'mssql' => {
+				'mssql-prod1' => {
+				  'host' => 'mssql-prod1.library.tamu.edu',
+				  'instance' => 'mssqlprod1',
+				  'tds version' => '7.0',
+				},
+				'mssql-prod2' => {
+				  'host' => 'mssql-prod2.library.tamu.edu',
+				  'instance' => 'mssqlprod2',
+				  'tds version' => '7.0',
+				},  
+				'mssql-dev1' => {
+				  'host' => 'mssql-dev1.library.tamu.edu',
+				  'instance' => 'mssqldev1',
+				  'tds version' => '7.0',
+				},
+			},			
+		},
 	},
 )
