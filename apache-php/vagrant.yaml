@@ -18,6 +18,13 @@
 #               Vagrantfile
 #
 # Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
+#
+# At the time of this writing I am using:
+# chef-client version: 12.19.36
+# berks version: 5.6.4
+# kitchen version: 1.16.0
+# vagrant 1.9.3
+# Virtualbox 5.1.22
 
 # what base vm and settings we are using
 virtual_machine_base : bento/oracle-7.3
@@ -42,13 +49,17 @@ chef :
 
 # this is where the code lives and is mapped to the virtual box
 # the apache_role file will also need the www_root setup to be the same
+# this basically says C:\data/www_root on my local machine will be
+# mounted as /data/www_root on the virtual machine 
 syncDir :
     host           : C:\data/www_root
     guest          : /data/www_root
     dmode          : 777
     fmode          : 777
 
-# www host port is setup here     
+# www host port is setup here this basically says
+# port 8080 on my local machine will be
+# redirected to port 80 on the virtual machine    
 forward_ports :  
     - host: 8080
       guest: 80
