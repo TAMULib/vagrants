@@ -1,9 +1,10 @@
 source 'https://supermarket.chef.io'
 source :chef_server
 
-# you can specifiy cookbooks from supermarket, local chef server, or specify a local path
-# example:  cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
+# If you need to use Local cookbook path and not one on chef server
+# because local cookbook has modifications that are not uploaded yet
+# Example:  cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
 
 cookbook 'tl_base', '0.3.11'
-# cookbook 'tl_app'
-cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
+cookbook 'tl_app', '0.2.0'
+
