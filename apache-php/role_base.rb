@@ -1,10 +1,9 @@
 name 'role_base'
-description 'Role for Vagrant Apache box using chef12. 
-The omnibus_updater section is is required if using tl_base,
-The tl_firewall section is required if using tl_base,
-The rsyslog section server=true and server_ip setting is required for tl_base when used on Vagrant,
-If you just an apache / php you only need the recipe[tl_app::apache] and recipe[tl_app::php],
-I went ahead and included tl_base to get the generic stuff from systems and networking to ensure it all worked
+description 'Role base for use with vagrant box running the tl_app cookbook / Apache box using chef12. 
+The omnibus_updater version section is is required if using tl_base,
+The tl_firewall section is used to ensure ports are open,
+The rsyslog section server=true and server_ip setting is required for tl_base when used on Vagrant.  It basically says do not 
+try and send logs we are just running it locally.
 '
 
 run_list(
