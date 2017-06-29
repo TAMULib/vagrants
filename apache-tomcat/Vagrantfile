@@ -1,0 +1,95 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# |
+# | Require YAML module
+# |
+require 'yaml'
+
+# |
+# | Get dir path
+# |
+dir = File.dirname(File.expand_path(__FILE__))
+
+# |
+# | Read YAML files
+# |
+settings       = YAML.load_file("#{dir}/vagrant.yaml")
+
+#
+#
+# defining some variables from the config file. 
+
+$virtual_machine_base = settings['virtual_machine_base']  
+$box_name = settings['box_name'] 
+$box_memory = settings['box_memory'] 
+$box_cpu = settings['box_cpu'] 
+$enable_sync = settings['enable_sync'] 
+
+$chef_version = settings['chef']['version'] 
+$local_cookbooks_path = settings['chef']['local_cookbooks_path']
+$local_roles_path = settings['chef']['local_roles_path']
+$local_nodes_path = settings['chef']['local_nodes_path']
+$local_node_name = settings['chef']['node_file_name'] 	# Node exists
+
+$local_sync_folder = settings['syncDir']['host']
+$vm_sync_folder = settings['syncDir']['guest']
+$dmode = settings['syncDir']['dmode']
+$fmode = settings['syncDir']['fmode']
+
+#
+# The www document_root is defined / overridden in the role file
+# It needs to match the syncDir guest definition
+#
+
+Vagrant.configure("2") do |config|
+
+	config.vm.box = $virtual_machine_base
+
+	config.vm.provider "virtualbox" do |v|
+		v.name = $box_name
+		v.memory = $box_memory
+		v.cpus = $box_cpu
+	end	
+	
+	if $enable_sync == true	
+		# ensure the vagrant box has the sync directory created
+		config.vm.provision "shell" do |s|
+			s.inline = "mkdir -p " + $vm_sync_folder
+		end  	
+	
+		# mount the sync folder
+		config.vm.synced_folder $local_sync_folder, $vm_sync_folder, id: "www-data",
+			owner: "vagrant",
+			group: "vagrant",
+			mount_options:["dmode=#{settings["syncDir"]["dmode"]}",
+						   "fmode=#{settings["syncDir"]["fmode"]}"]
+	end
+	
+	# setup port forwards
+	fwd_ports = settings["forward_ports"]
+		fwd_ports.each do |int|   
+			config.vm.network "forwarded_port", guest: int["guest"], host: int["host"], host_ip: "#{int["host_ip"]}", id: "#{int["id"]}"
+		end
+
+	# run chef
+	config.vm.provision "chef_solo" do |chef|
+		chef.version = $chef_version
+		chef.cookbooks_path = $local_cookbooks_path
+		chef.roles_path = $local_roles_path	
+		chef.nodes_path = $local_nodes_path	
+		
+		add_roles = settings['chef']['roles']
+			add_roles.each do |add_this_role|   
+				chef.add_role("#{add_this_role["role_file_name"]}")
+			end		
+		
+		chef.node_name = $local_node_name
+	end
+
+	# vim is not on base box so install it after box is running
+	config.vm.provision "shell" do |s|
+		s.inline = "yum install -y vim"
+	end  
+  
+end

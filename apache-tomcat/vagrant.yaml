@@ -1,0 +1,73 @@
+#
+# config file for tomcat box
+#
+# For this to work you need to do a "berks vendor" from the C:\vagrantboxes/apache-tomcat/ directory
+# example: berks vendor C:\vagrantboxes/apache-tomcat/cookbooks/ 
+# this download the cookbooks from the chef server, and supermarket, etc into the directory defined in local_cookbooks_path
+# here is the directory structure I used with this.  All files are placed in the apache-tomcat directory
+# the cookbook directory will be created by "berks"
+#
+#   C:.
+#    ├───vagrantboxes
+#        └───apache-tomcat
+#               Berksfile
+#               node_tomcat.json
+#               role_tomcat.rb
+#               role_base.rb
+#               vagrant.yaml
+#               Vagrantfile
+#
+# Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
+#
+# At the time of this writing I am using:
+# chef-client version: 12.19.36
+# berks version: 5.6.4
+# kitchen version: 1.16.0
+# vagrant 1.9.3
+# Virtualbox 5.1.22
+
+# what base vm and settings we are using
+virtual_machine_base : bento/oracle-7.3
+box_name : apache-tomcat
+box_memory : 1024
+box_cpu : 1
+enable_sync : false
+
+# chef is same version as what we use in the library
+# we really only need role_apache for baseic setup.  role_base ensures we get additional library setup settings that 
+# system and networking uses 
+
+# node_file_name and role_file_name are actual names of files that will need to exist.  
+chef :
+    version                 : 12.19.33  
+    local_cookbooks_path    : C:\vagrantboxes/apache-tomcat/cookbooks/
+    local_roles_path        : C:\vagrantboxes/apache-tomcat/	
+    local_nodes_path        : C:\vagrantboxes/apache-tomcat/
+    node_file_name          : node_tomcat
+    roles                   :
+        -   role_file_name  : role_base
+        -   role_file_name  : role_tomcat
+
+# this is where the code lives and is mapped to the virtual box
+# the apache_role file will also need the tomcat setup to be the same
+# this basically says C:\data/tomcat on my local machine will be
+# mounted as /data/tomcat on the virtual machine 
+syncDir :
+    host           : C:\data/tomcat
+    guest          : /data/tomcat
+    dmode          : 777
+    fmode          : 777
+
+# www host port is setup here this basically says
+# port 8080 on my local machine will be
+# redirected to port 80 on the virtual machine    
+forward_ports :  
+    - host: 9000
+      guest: 9000
+      host_ip: 127.0.0.1
+      id: www
+    - host: 2223
+      guest: 22
+      host_ip: 127.0.0.1
+      id: ssh      
+
