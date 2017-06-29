@@ -24,6 +24,7 @@ $virtual_machine_base = settings['virtual_machine_base']
 $box_name = settings['box_name'] 
 $box_memory = settings['box_memory'] 
 $box_cpu = settings['box_cpu'] 
+$enable_sync = settings['enable_sync'] 
 
 $chef_version = settings['chef']['version'] 
 $local_cookbooks_path = settings['chef']['local_cookbooks_path']
@@ -51,18 +52,20 @@ Vagrant.configure("2") do |config|
 		v.cpus = $box_cpu
 	end	
 
-	# ensure the vagrant box has the sync directory created
-	config.vm.provision "shell" do |s|
-		s.inline = "mkdir -p " + $vm_sync_folder
-	end  	
+	if $enable_sync == true	
+		# ensure the vagrant box has the sync directory created
+		config.vm.provision "shell" do |s|
+			s.inline = "mkdir -p " + $vm_sync_folder
+		end  	
 	
-	# mount the sync folder
-	config.vm.synced_folder $local_sync_folder, $vm_sync_folder, id: "www-data",
-		owner: "vagrant",
-		group: "vagrant",
-		mount_options:["dmode=#{settings["syncDir"]["dmode"]}",
-                       "fmode=#{settings["syncDir"]["fmode"]}"]
-	
+		# mount the sync folder
+		config.vm.synced_folder $local_sync_folder, $vm_sync_folder, id: "www-data",
+			owner: "vagrant",
+			group: "vagrant",
+			mount_options:["dmode=#{settings["syncDir"]["dmode"]}",
+						   "fmode=#{settings["syncDir"]["fmode"]}"]
+	end
+					   
 	# setup port forwards
 	fwd_ports = settings["forward_ports"]
 		fwd_ports.each do |int|   

@@ -10,11 +10,11 @@
 #   C:.
 #    ├───vagrantboxes
 #        └───apache-php
+#               Berksfile
 #               node_apache.json
 #               role_apache.rb
 #               role_base.rb
 #               vagrant.yaml
-#               resources
 #               Vagrantfile
 #
 # Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
@@ -31,6 +31,7 @@ virtual_machine_base : bento/oracle-7.3
 box_name : apache-php
 box_memory : 1024
 box_cpu : 1
+enable_sync : true
 
 # chef is same version as what we use in the library
 # we really only need role_apache for baseic setup.  role_base ensures we get additional library setup settings that 
