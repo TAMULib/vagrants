@@ -18,11 +18,11 @@ Here is my directory and file structure that I used
 C:.
 +---vagrantboxes
           +---apache-php
+				  Berksfile
                   node_apache.json
                   role_apache.rb
                   role_base.rb
                   vagrant.yaml
-                  resources
                   Vagrantfile
 
 change directory to c:\vagrantboxes\apache-php
