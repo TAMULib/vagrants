@@ -25,6 +25,7 @@ box_name : apache-php
 box_memory : 1024
 box_cpu : 1
 enable_sync : true
+enable_other_hosts : false
 
 # chef is same version as what we use in the library
 # we really only need role_apache for baseic setup.  role_base ensures we get additional library setup settings that 
@@ -70,3 +71,10 @@ forward_ports :
       host_ip: 127.0.0.1
       id: ssh      
 
+# At times you need one VM to find another.  This is a quick way to do that.
+# 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
+# cause it to look to the host machine for that box.  Since it is on another port it will loop back to that 
+# other box.  I have a Tomcat box that my Apache box needs to find.
+other_hosts :  
+    - host: apache-tomcat
+      host_ip: 10.0.2.2
