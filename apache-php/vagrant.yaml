@@ -18,6 +18,13 @@
 #               Vagrantfile
 #
 # Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
+#
+# At the time of this writing I am using:
+# chef-client version: 12.19.36
+# berks version: 5.6.4
+# kitchen version: 1.16.0
+# vagrant 1.9.3
+# Virtualbox 5.1.22
 
 # what base vm and settings we are using
 virtual_machine_base : bento/oracle-7.3

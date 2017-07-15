@@ -32,6 +32,7 @@ box_name : apache-tomcat
 box_memory : 1024
 box_cpu : 1
 enable_sync : false
+enable_other_hosts : false
 
 # chef is same version as what we use in the library
 # we really only need role_apache for baseic setup.  role_base ensures we get additional library setup settings that 
@@ -52,22 +53,36 @@ chef :
 # the apache_role file will also need the tomcat setup to be the same
 # this basically says C:\data/tomcat on my local machine will be
 # mounted as /data/tomcat on the virtual machine 
-syncDir :
-    host           : C:\data/tomcat
-    guest          : /data/tomcat
-    dmode          : 777
-    fmode          : 777
 
-# www host port is setup here this basically says
-# port 8080 on my local machine will be
-# redirected to port 80 on the virtual machine    
+# You can have mutiple synced folders.
+# Just add more starting with - Like forward ports, etc.
+#
+
+syncDir :
+    - host           : C:\data/
+      guest          : /data/
+      dmode          : 777
+      fmode          : 777
+      id             : data
+      
+# tomcat host port is setup here this basically says
+# port 9000 on my local machine will be
+# redirected to port 9000 on the virtual machine    
 forward_ports :  
     - host: 9000
       guest: 9000
       host_ip: 127.0.0.1
-      id: www
+      id: tomcat
     - host: 2223
       guest: 22
       host_ip: 127.0.0.1
       id: ssh      
-
+      
+# At times you need one VM to find another.  This is a quick way to do that.
+# 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
+# cause it to look to the host machine for that box.  Since it is on another port it will loop back to that 
+# other box.  I have an apache box that my tomcat box needs to find.
+other_hosts :  
+    - host: apache-php
+      host_ip: 10.0.2.2
+      
