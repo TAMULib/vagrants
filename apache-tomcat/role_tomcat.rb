@@ -10,7 +10,15 @@ run_list(
 default_attributes(
 	'tl_app' => {
 		'tomcat' => {
-			'home' => '/data/tomcat'
+			'home' => '/data/tomcat',
+			'server' => {
+			  'maxThreads' => '500',
+			  'URIEncoding' => 'UTF-8'
+			}, 
+			'X' => {
+			  'ms' => '2g',
+			  'mx' => '4g'
+			}, 			
 		},
 	},
 )

@@ -1,8 +1,8 @@
 #
-# config file for tomcat box
+# config file for apache / Tomcat box
 #
-# For this to work you need to do a "berks vendor" from the C:\vagrantboxes/apache-tomcat/ directory
-# example: berks vendor C:\vagrantboxes/apache-tomcat/cookbooks/ 
+# For this to work you need to do a "berks vendor cookbooks" from the C:\vagrantboxes/apache-tomcat/ directory
+# example: "berks vendor cookbooks/" 
 # this download the cookbooks from the chef server, and supermarket, etc into the directory defined in local_cookbooks_path
 # here is the directory structure I used with this.  All files are placed in the apache-tomcat directory
 # the cookbook directory will be created by "berks"
@@ -49,40 +49,36 @@ chef :
         -   role_file_name  : role_base
         -   role_file_name  : role_tomcat
 
-# this is where the code lives and is mapped to the virtual box
-# the apache_role file will also need the tomcat setup to be the same
-# this basically says C:\data/tomcat on my local machine will be
-# mounted as /data/tomcat on the virtual machine 
+# This is where the code lives and is mapped to the virtual box
 
 # You can have mutiple synced folders.
 # Just add more starting with - Like forward ports, etc.
 #
 
 syncDir :
-    - host           : C:\data/
-      guest          : /data/
+    - host           : C:\data\tomcat
+      guest          : /data/tmp
       dmode          : 777
       fmode          : 777
-      id             : data
-      
-# tomcat host port is setup here this basically says
+      id             : tmp
+
+# www host port is setup here this basically says
 # port 9000 on my local machine will be
 # redirected to port 9000 on the virtual machine    
 forward_ports :  
     - host: 9000
       guest: 9000
       host_ip: 127.0.0.1
-      id: tomcat
+      id: www
     - host: 2223
       guest: 22
       host_ip: 127.0.0.1
       id: ssh      
-      
+
 # At times you need one VM to find another.  This is a quick way to do that.
 # 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
 # cause it to look to the host machine for that box.  Since it is on another port it will loop back to that 
-# other box.  I have an apache box that my tomcat box needs to find.
+# other box.  I have a Tomcat box that my Apache box needs to find.
 other_hosts :  
     - host: apache-php
       host_ip: 10.0.2.2
-      
