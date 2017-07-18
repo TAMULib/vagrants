@@ -62,14 +62,14 @@ syncDir :
       fmode          : 777
       id             : tmp
 
-# www host port is setup here this basically says
+# tomcat host port is setup here this basically says
 # port 9000 on my local machine will be
 # redirected to port 9000 on the virtual machine    
 forward_ports :  
     - host: 9000
       guest: 9000
       host_ip: 127.0.0.1
-      id: www
+      id: tomcat
     - host: 2223
       guest: 22
       host_ip: 127.0.0.1

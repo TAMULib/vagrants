@@ -1,8 +1,8 @@
 #
 # config file for apache / php box
 #
-# For this to work you need to do a "berks vendor" from the C:\vagrantboxes/apache-php/ directory
-# example: berks vendor C:\vagrantboxes/apache-php/cookbooks/ 
+# For this to work you need to do a "berks vendor cookbooks" from the C:\vagrantboxes/apache-php/ directory
+# example: "berks vendor cookbooks/" 
 # this download the cookbooks from the chef server, and supermarket, etc into the directory defined in local_cookbooks_path
 # here is the directory structure I used with this.  All files are placed in the apache-php directory
 # the cookbook directory will be created by "berks"
