@@ -8,11 +8,11 @@ default_attributes(
 	'mysql': {
 		'version' => '5.7',
 		'server' => {
-			'data-dir': '/data/mysql',
-			'initial-root-password': 'password'
+			'data-dir' => '/data/mysql',
+			'initial-root-password' => 'password'
 		},
 		'extra_settings' => {
-			'max_allowed_packet' : '16M'
+			'max_allowed_packet' => '16M'
 		},
 	}
 )

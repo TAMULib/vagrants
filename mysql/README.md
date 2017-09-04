@@ -33,8 +33,14 @@ Since I gave the named the node different from the node file name you will see a
 
 After the box is spun up
 vagrant ssh will ssh you into the box
+
+** once connected via ssh you can issue mysql -u root -p -h 127.0.0.1 to connect to mysql
+if you want to connect from other boxes issue this command
+** GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;  <- The password is defined in the roll 
 vagrant provision will re-rerun chef
 vagrant destroy will start over
 
 To start over I usually just delete everything except the original files and re-start the process. 
 Check out the vagrant.yaml for settings and more notes.
+
+
