@@ -16,6 +16,7 @@
 #               role_base.rb
 #               vagrant.yaml
 #               Vagrantfile
+#               README.md
 #
 # Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
 #
@@ -56,11 +57,13 @@ chef :
 #
 
 syncDir :
-    - host           : C:\data\tomcat
-      guest          : /data/tmp
+    - host           : C:\data\tomcat_webapps
+      guest          : /opt/tomcat/webapps
       dmode          : 777
       fmode          : 777
-      id             : tmp
+      id             : webapps
+      owner          : vagrant
+      group          : vagrant     
 
 # tomcat host port is setup here this basically says
 # port 9000 on my local machine will be
@@ -82,3 +85,5 @@ forward_ports :
 other_hosts :  
     - host: apache-php
       host_ip: 10.0.2.2
+    - host: mysql
+      host_ip: 10.0.2.2      

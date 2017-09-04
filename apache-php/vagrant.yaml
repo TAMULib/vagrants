@@ -16,6 +16,7 @@
 #               role_base.rb
 #               vagrant.yaml
 #               Vagrantfile
+#               README.md
 #
 # Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
 #
@@ -31,7 +32,7 @@ virtual_machine_base : bento/oracle-7.3
 box_name : apache-php
 box_memory : 1024
 box_cpu : 1
-enable_sync : true
+enable_sync : false
 enable_other_hosts : false
 
 # chef is same version as what we use in the library
@@ -64,12 +65,14 @@ syncDir :
       dmode          : 777
       fmode          : 777
       id             : www
+      owner          : vagrant
+      group          : vagrant       
 
 # www host port is setup here this basically says
 # port 8080 on my local machine will be
 # redirected to port 80 on the virtual machine    
 forward_ports :  
-    - host: 80
+    - host: 8080
       guest: 80
       host_ip: 127.0.0.1
       id: www
@@ -85,3 +88,5 @@ forward_ports :
 other_hosts :  
     - host: apache-tomcat
       host_ip: 10.0.2.2
+    - host: mysql
+      host_ip: 10.0.2.2      
