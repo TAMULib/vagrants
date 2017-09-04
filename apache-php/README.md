@@ -18,12 +18,12 @@ Here is my directory and file structure that I used
 C:.
 +---vagrantboxes
           +---apache-php
-				  Berksfile
-                  node_apache.json
-                  role_apache.rb
-                  role_base.rb
-                  vagrant.yaml
-                  Vagrantfile
+				Berksfile
+                node_apache.json
+                role_apache.rb
+                role_base.rb
+                vagrant.yaml
+                Vagrantfile
 
 change directory to c:\vagrantboxes\apache-php
 run berks vendor cookbooks/ <- this will download all the cookbooks needed into a cookbooks sub directory located in c:\vagrantboxes\apache-php\

@@ -18,12 +18,12 @@ Here is my directory and file structure that I used
 C:.
 +---vagrantboxes
           +---mysql
-				  Berksfile
-                  node_mysql.json
-                  role_mysql.rb
-                  role_base.rb
-                  vagrant.yaml
-                  Vagrantfile
+				Berksfile
+                node_mysql.json
+                role_mysql.rb
+                role_base.rb
+                vagrant.yaml
+                Vagrantfile
 
 change directory to c:\vagrantboxes\mysql
 run berks vendor cookbooks/ <- this will download all the cookbooks needed into a cookbooks sub directory located in c:\vagrantboxes\mysql\

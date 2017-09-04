@@ -28,6 +28,7 @@
 # Virtualbox 5.1.22
 
 # what base vm and settings we are using
+
 virtual_machine_base : bento/oracle-7.3
 box_name : apache-tomcat
 box_memory : 1024
@@ -40,6 +41,7 @@ enable_other_hosts : false
 # system and networking uses 
 
 # node_file_name and role_file_name are actual names of files that will need to exist.  
+
 chef :
     version                 : 12.19.33  
     local_cookbooks_path    : C:\vagrantboxes/apache-tomcat/cookbooks/
@@ -50,11 +52,14 @@ chef :
         -   role_file_name  : role_base
         -   role_file_name  : role_tomcat
 
-# This is where the code lives and is mapped to the virtual box
+# This is where the files on the local machine can live and then mapped to the virtual box
+# this basically says C:\data\tomcat_webapps on my local machine will be
+# mounted as /opt/tomcat/webapps on the virtual machine.
+# I saw extreem slowness on tomcat when I did this.  But it did work and could possibly be done better. 
 
 # You can have mutiple synced folders.
 # Just add more starting with - Like forward ports, etc.
-#
+# By default I have enable_sync set to false.  You must set this to true for it to work.
 
 syncDir :
     - host           : C:\data\tomcat_webapps
@@ -68,6 +73,7 @@ syncDir :
 # tomcat host port is setup here this basically says
 # port 9000 on my local machine will be
 # redirected to port 9000 on the virtual machine    
+
 forward_ports :  
     - host: 9000
       guest: 9000
@@ -80,8 +86,14 @@ forward_ports :
 
 # At times you need one VM to find another.  This is a quick way to do that.
 # 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
-# cause it to look to the host machine for that box.  Since it is on another port it will loop back to that 
-# other box.  I have a Tomcat box that my Apache box needs to find.
+# cause it to look to the host machine for that box.  I also have these names set in my hosts file on my local box so I can 
+# use the same names.
+#
+# Since it is on another port it will loop back to that 
+# other box.
+#
+# By default I have enable_other_hosts set to false.  You must set this to true for it to work.
+
 other_hosts :  
     - host: apache-php
       host_ip: 10.0.2.2

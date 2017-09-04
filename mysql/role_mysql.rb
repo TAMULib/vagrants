@@ -12,7 +12,7 @@ default_attributes(
 			'initial-root-password': 'password'
 		},
 		'extra_settings' => {
-			'sql_mode' => '""'
+			'max_allowed_packet' : '16M'
 		},
 	}
 )

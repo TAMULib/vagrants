@@ -1,5 +1,5 @@
 name 'role_base'
-description 'Role base for use with vagrant box running the tl_app cookbook / Apache box using chef12. 
+description 'Role base for use with vagrant box running the tl_app cookbook / mysql box using chef12. 
 The omnibus_updater version section is is required if using tl_base,
 The tl_firewall section is used to ensure ports are open,
 The rsyslog section server=true and server_ip setting is required for tl_base when used on Vagrant.  It basically says do not 
@@ -18,7 +18,7 @@ override_attributes(
 default_attributes(
     'tl_firewall': {
 		'www': {
-			'port': [80,443],
+			'port': [3306],
 			'protocol': 'tcp'
 		}
     },
