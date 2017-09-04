@@ -5,6 +5,6 @@ source :chef_server
 # because local cookbook has modifications that are not uploaded yet
 # Example:  cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
 
-cookbook 'tl_base', '0.3.11'
-cookbook 'tl_app', '0.2.0'
+cookbook 'tl_base', '0.3.13'
+cookbook 'tl_app', '0.3.0'
 
