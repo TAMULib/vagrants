@@ -1,0 +1,114 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# |
+# | Require YAML module
+# |
+require 'yaml'
+
+# |
+# | Get dir path
+# |
+dir = File.dirname(File.expand_path(__FILE__))
+
+# |
+# | Read YAML files
+# |
+settings       = YAML.load_file("#{dir}/vagrant.yaml")
+
+#
+#
+# defining some variables from the config file. 
+
+$virtual_machine_base = settings['virtual_machine_base']  
+$box_name = settings['box_name'] 
+$box_memory = settings['box_memory'] 
+$box_cpu = settings['box_cpu'] 
+$enable_sync = settings['enable_sync'] 
+$enable_other_hosts = settings['enable_other_hosts'] 
+
+$chef_version = settings['chef']['version'] 
+$local_cookbooks_path = settings['chef']['local_cookbooks_path']
+$local_roles_path = settings['chef']['local_roles_path']
+$local_nodes_path = settings['chef']['local_nodes_path']
+$local_node_name = settings['chef']['node_file_name'] 	# Node exists
+
+#
+# The www document_root is defined / overridden in the role file
+# It needs to match the syncDir guest definition
+#
+
+Vagrant.configure("2") do |config|
+
+	config.vm.box = $virtual_machine_base
+	config.vm.hostname = $box_name
+
+	config.vm.provider "virtualbox" do |v|
+		v.name = $box_name
+		v.memory = $box_memory
+		v.cpus = $box_cpu
+	end	
+
+	if $enable_sync == true	
+		# setup the sync folders
+		sync_folder = settings["syncDir"]
+			sync_folder.each do |init_sync| 
+
+				# ensure the vagrant box has the sync directory created
+				config.vm.provision "shell" do |s|
+					s.inline = 'mkdir -p ' + init_sync["guest"].to_s
+				end  
+					
+				config.vm.synced_folder init_sync["host"], init_sync["guest"], id: init_sync["id"].to_s,
+					owner: init_sync["owner"],
+					group: init_sync["group"],
+					mount_options:['dmode=' + init_sync["dmode"].to_s,
+								   'fmode=' + init_sync["fmode"].to_s]
+			end
+	end
+
+	# setup port forwards
+	fwd_ports = settings["forward_ports"]
+		fwd_ports.each do |int|   
+			config.vm.network "forwarded_port", guest: int["guest"], host: int["host"], host_ip: "#{int["host_ip"]}", id: "#{int["id"]}"
+		end
+		
+	# run chef
+	config.vm.provision "chef_solo" do |chef|
+		chef.version = $chef_version
+		chef.cookbooks_path = $local_cookbooks_path
+		chef.roles_path = $local_roles_path	
+		chef.nodes_path = $local_nodes_path	
+		
+		add_roles = settings['chef']['roles']
+			add_roles.each do |add_this_role|   
+				chef.add_role("#{add_this_role["role_file_name"]}")
+			end		
+		
+		chef.node_name = $local_node_name
+	end
+
+	# At times you need one VM to find another.  This is a quick way to do that.
+	# 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
+	# cause it to look to the host machine for that box.  Since it is on another port it will loop back to that 
+	# other box.  I have a Tomcat box that my Apache box needs to find.	
+	# This removes the host and adds it back so we don't end up with a bunch of duplicates	
+
+	if $enable_other_hosts == true		
+		add_hosts = settings['other_hosts']
+			add_hosts.each do |add_this_host|   
+				config.vm.provision "shell" do |s|
+					s.inline = 'sudo sed -i "/' + add_this_host["host_ip"] + ' ' + add_this_host["host"] + '/d" /etc/hosts'
+				end 
+				config.vm.provision "shell" do |s|
+					s.inline = 'sudo echo "' + add_this_host["host_ip"] + ' ' + add_this_host["host"] + '" | sudo tee -a /etc/hosts'
+				end 			
+			end	
+	end
+
+	# vim is not on base box so install it after box is running
+	config.vm.provision "shell" do |s|
+		s.inline = "yum install -y vim"
+	end  
+	
+end

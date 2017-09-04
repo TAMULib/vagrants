@@ -1,0 +1,9 @@
+{
+  "name": "mysql-vagrant-box",
+  "normal": {
+    "tags": [
+		"fresh_install"
+    ]
+  }
+}   
+ 
