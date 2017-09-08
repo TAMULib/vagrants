@@ -1,0 +1,99 @@
+#
+# config file for Chronam box
+#
+# For this to work you need to do a "berks vendor cookbooks" from the C:\vagrantboxes/srv-newspaper/ directory
+# example: "berks vendor cookbooks/" 
+# this download the cookbooks from the chef server, and supermarket, etc into the directory defined in local_cookbooks_path
+# here is the directory structure I used with this.  All files are placed in the srv-newspaper directory
+# the cookbook directory will be created by "berks"
+#
+#   C:.
+#    ├───vagrantboxes
+#        └───srv-newspaper
+#               Berksfile
+#               node_srv-newspaper.json
+#               role_srv-newspaper.rb
+#               role_base.rb
+#               vagrant.yaml
+#               Vagrantfile
+#               README.md
+#
+# Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
+#
+# At the time of this writing I am using:
+# chef-client version: 12.19.36
+# berks version: 5.6.4
+# kitchen version: 1.16.0
+# vagrant 1.9.3
+# Virtualbox 5.1.22
+
+# what base vm and settings we are using
+
+virtual_machine_base : bento/oracle-7.3
+box_name : srv-newspaper
+box_memory : 1024
+box_cpu : 1
+enable_sync : false
+enable_other_hosts : true
+
+# chef is same version as what we use in the library
+# we really only need role_srv-newspaper.rb for basic setup.  role_base ensures we get additional library setup settings that 
+# system and networking uses 
+
+# node_file_name and role_file_name are actual names of files that will need to exist.  
+
+chef :
+    version                 : 12.19.33  
+    local_cookbooks_path    : C:\vagrantboxes/srv-newspaper/cookbooks/
+    local_roles_path        : C:\vagrantboxes/srv-newspaper/	
+    local_nodes_path        : C:\vagrantboxes/srv-newspaper/
+    node_file_name          : node_newspaper
+    roles                   :
+        -   role_file_name  : role_base
+        -   role_file_name  : role_srv-newspaper
+
+# This is where the code lives and is mapped to the virtual box
+# this basically says C:\data\srv-newspaper\core on my local machine will be
+# mounted as /opt/chronam-3.10/core on the virtual machine 
+# /opt/chronam-3.10/core is where chronam is deployed
+
+# You can have mutiple synced folders.
+# Just add more starting with - Like forward ports, etc.
+# By default I have enable_sync set to false.  You must set this to true for it to work.
+
+syncDir :
+    - host           : C:\data\srv-newspaper\core
+      guest          : /opt/chronam-tamu_master/core
+      dmode          : 777
+      fmode          : 777
+      id             : chronam
+      owner          : vagrant
+      group          : vagrant       
+
+# chronam host port is setup here this basically says
+# port 8085 on my local machine will be
+# redirected to port 80 on the virtual machine    
+
+forward_ports :  
+    - host: 8085
+      guest: 80
+      host_ip: 127.0.0.1
+      id: chronam
+    - host: 2225
+      guest: 22
+      host_ip: 127.0.0.1
+      id: ssh      
+
+# At times you need one VM to find another.  This is a quick way to do that.
+# 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
+# cause it to look to the host machine for that box.  I also have these names set in my hosts file on my local box so I can 
+# use the same names.
+#
+# Since it is on another port it will loop back to that 
+# other box.  I have a Tomcat box that my Apache box needs to find.
+#
+# By default I have enable_other_hosts set to false.  You must set this to true for it to work.
+
+other_hosts :  
+    - host: apache-php
+      host_ip: 10.0.2.2      

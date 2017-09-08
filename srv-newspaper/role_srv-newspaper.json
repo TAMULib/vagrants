@@ -1,0 +1,29 @@
+{
+  "name": "newspaper",
+  "description": "chronam/newspaper server",
+  "default_attributes": {
+    "java": {
+      "jdk_version": "8",
+      "arch": "x86_64"
+    },
+    "chronam":{
+		"gitrepo": "https://github.com/TAMULib/chronam.git",	 
+		"revision": "tamu_master"	
+    },
+    "newspaper":{
+		"filerepo": ""	  
+    },
+    "mysql": {
+      "version": "5.7",
+      "server": {
+        "initial-root-password": "password",
+        "data-dir": "/data"
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "run_list": [
+    "recipe[tl_newspaper]"
+  ]
+}
