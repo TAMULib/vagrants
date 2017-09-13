@@ -34,7 +34,8 @@ box_name : srv-newspaper
 box_memory : 1024
 box_cpu : 1
 enable_sync : false
-enable_other_hosts : true
+enable_other_hosts : false
+load_sample_data : false
 
 # chef is same version as what we use in the library
 # we really only need role_srv-newspaper.rb for basic setup.  role_base ensures we get additional library setup settings that 
