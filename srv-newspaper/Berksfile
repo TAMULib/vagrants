@@ -6,4 +6,4 @@ source :chef_server
 # Example:  cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
 
 cookbook 'tl_base', '0.3.13'
-cookbook 'tl_newspaper', '0.2.3'
+cookbook 'tl_newspaper', '0.2.4'
