@@ -47,7 +47,7 @@ chef :
     local_cookbooks_path    : C:\Vagrant/vagrants/fedora/cookbooks/
     local_roles_path        : C:\Vagrant/vagrants/fedora/	
     local_nodes_path        : C:\Vagrant/vagrants/fedora/
-    node_file_name          : node_tomcat
+    node_file_name          : node_fedora
     roles                   :
         -   role_file_name  : role_fedora
 
@@ -62,8 +62,8 @@ chef :
 # By default I have enable_sync set to false.  You must set this to true for it to work.
 
 syncDir :
-    - host           : C:\data\tomcat_webapps
-      guest          : /opt/tomcat/webapps
+    - host           : C:\data\fedora_webapps
+      guest          : /opt/tomcat/webapps/fcrepo
       dmode          : 777
       fmode          : 777
       id             : webapps

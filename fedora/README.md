@@ -2,15 +2,15 @@ This assumes you have local chef, and vagrant setup.
 You are also able to read from our chef12 server
 
 At the time of this writing here are the versions I am using:
-chef-client version: 12.19.36
-Berks version: 5.6.4
-Kitchen version: 1.16.0
-Vagrant 1.9.3
-Virtualbox 5.1.22
+chef-client version: 13.4.19
+Berks version: 6.3.1
+Kitchen version: 1.17.0
+Vagrant 1.9.8
+Virtualbox 5.1.26
 
 Additional Notes are located in some of the files.
 
-Once this is complete you will have an Apache Tomcat Vagrant box.  
+Once this is complete you will have an Apache Tomcat Vagrant box running Fedora.  
 
 FYI - From a Vagrant box to access your local box use IP 10.0.2.2 in my local development I use a local MySQL install that is accessed from the Vagrant box by this ip.
 

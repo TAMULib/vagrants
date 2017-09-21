@@ -70,7 +70,7 @@ Vagrant.configure("2") do |config|
 	# setup port forwards
 	fwd_ports = settings["forward_ports"]
 		fwd_ports.each do |int|   
-			config.vm.network "forwarded_port", guest: int["guest"], host: int["host"], host_ip: "#{int["host_ip"]}", id: "#{int["id"]}"
+			config.vm.network "forwarded_port", guest: int["guest"], host: int["host"], host_ip: "#{int["host_ip"]}", id: "#{int["id"]}", protocol: "tcp"
 		end
 
 	# At times you need one VM to find another.  This is a quick way to do that.

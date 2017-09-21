@@ -6,6 +6,3 @@ source :chef_server
 # Example:  cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
 
 cookbook 'tl_fedora', '0.1.1'
-
-# cookbook 'tl_base', '0.3.13'
-# cookbook 'tl_app', '0.3.0'

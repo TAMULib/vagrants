@@ -1,9 +1,0 @@
-{
-  "name": "tomcat-vagrant-box",
-  "normal": {
-    "tags": [
-		"fresh_install"
-    ]
-  }
-}   
- 
