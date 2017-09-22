@@ -1,5 +1,5 @@
 {
-  "name": "tomcat-vagrant-box",
+  "name": "fedora-vagrant-box",
   "normal": {
     "tags": [
 		"fresh_install"
