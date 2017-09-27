@@ -17,8 +17,8 @@ override_attributes(
   )
 default_attributes(
     'tl_firewall': {
-		'www': {
-			'port': [80],
+		'chronam': {
+			'port': [20, 21, 80, 4242, 4243],
 			'protocol': 'tcp'
 		}
     },

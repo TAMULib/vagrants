@@ -27,6 +27,8 @@ $box_cpu = settings['box_cpu']
 $enable_sync = settings['enable_sync'] 
 $enable_other_hosts = settings['enable_other_hosts'] 
 $load_sample_data = settings['load_sample_data'] 
+$enable_ftp = settings['enable_ftp'] 
+$ftp_password = settings['ftp_password'] 
 
 $chef_version = settings['chef']['version'] 
 $local_cookbooks_path = settings['chef']['local_cookbooks_path']
@@ -99,6 +101,10 @@ Vagrant.configure("2") do |config|
 
 	# Normally this file is pulled down by Chef from internal FTP server.  
 	config.vm.provision "file", source: "compute/aware-j2k-3.20-linux-x86-64-exp04.13.15.tar.gz", destination: "/tmp/aware-j2k-3.20-linux-x86-64-exp04.13.15.tar.gz"
+
+	if $enable_ftp == true
+		config.vm.provision "file", source: "compute/vsftpd.conf", destination: "/tmp/vsftpd.conf"
+	end
 	
 	# run chef
 	config.vm.provision "chef_solo" do |chef|
@@ -122,31 +128,40 @@ Vagrant.configure("2") do |config|
 		config.vm.provision "file", source: "batch/batch_txa_batt_ver58.tar.gz", destination: "/tmp/batch_txa_batt_ver58.tar.gz"
 		config.vm.provision "file", source: "batch/load_batch.sh", destination: "/tmp/load_batch.sh"
 		
-		# vim is not on base box so install it after box is running
 		config.vm.provision "shell" do |s|
 			s.inline = "tar -xf /tmp/batch_txa_batt_ver58.tar.gz -C /opt/chronam/data/batches"
 		end 
 
-		# vim is not on base box so install it after box is running
 		config.vm.provision "shell" do |s|
 			s.inline = "chown -R chronam:users /opt/chronam/data/batches/"
 		end 
 
-		# vim is not on base box so install it after box is running
 		config.vm.provision "shell" do |s|
 			s.inline = "chown chronam:users /tmp/load_batch.sh"
 		end 
-		
-		# vim is not on base box so install it after box is running
+
 		config.vm.provision "shell" do |s|
 			s.inline = "chmod +x /tmp/load_batch.sh"
 		end 		
 		
-		# vim is not on base box so install it after box is running
 		config.vm.provision "shell" do |s|
 			s.inline = "su -l chronam -c /tmp/load_batch.sh"
 		end 
 		
+	end
+
+	if $enable_ftp == true
+		config.vm.provision "shell" do |s|
+			s.inline = "sudo cp /tmp/vsftpd.conf /etc/vsftpd/vsftpd.conf"
+		end 
+		
+		config.vm.provision "shell" do |s|
+			s.inline = "sudo service vsftpd restart"
+		end 	
+		
+		config.vm.provision "shell" do |s|
+			s.inline = 'echo -e "' + $ftp_password + '\n' + $ftp_password + '" | passwd chronam'
+		end 		
 	end
 	
 end

@@ -36,6 +36,8 @@ box_cpu : 1
 enable_sync : false
 enable_other_hosts : false
 load_sample_data : false
+enable_ftp : false
+ftp_password : Letme1n!!
 
 # chef is same version as what we use in the library
 # we really only need role_srv-newspaper.rb for basic setup.  role_base ensures we get additional library setup settings that 
@@ -51,6 +53,7 @@ chef :
     node_file_name          : node_newspaper
     roles                   :
         -   role_file_name  : role_base
+        -   role_file_name  : role_srv-ftp
         -   role_file_name  : role_srv-newspaper
 
 # This is where the code lives and is mapped to the virtual box
@@ -80,10 +83,26 @@ forward_ports :
       guest: 80
       host_ip: 127.0.0.1
       id: chronam
-    - host: 2225
+    - host: 2226
       guest: 22
       host_ip: 127.0.0.1
-      id: ssh      
+      id: ssh  
+    - host: 20
+      guest: 20
+      host_ip: 127.0.0.1
+      id: ftp  
+    - host: 21
+      guest: 21
+      host_ip: 127.0.0.1
+      id: ftp1        
+    - host: 4242
+      guest: 4242
+      host_ip: 127.0.0.1
+      id: ftp2
+    - host: 4243
+      guest: 4243
+      host_ip: 127.0.0.1
+      id: ftp3         
 
 # At times you need one VM to find another.  This is a quick way to do that.
 # 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
