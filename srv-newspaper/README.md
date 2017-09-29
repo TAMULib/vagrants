@@ -15,17 +15,19 @@ Once this is complete you will have a Vagrant box running the Cronam newspaper. 
 FYI - From a Vagrant box to access your local box use IP 10.0.2.2.
 
 Here is my directory and file structure that I used
-C:.
-+---vagrantboxes
-          +---srv-newspaper
-			+---compute
-					aware-j2k-3.20-linux-x86-64-exp04.13.15.tar.gz
-			Berksfile
-            node_newspaper.json
-            role_srv-newspaper.rb
-            role_base.rb
-            vagrant.yaml
-            Vagrantfile
+   C:.
+    ├───vagrantboxes
+        └───srv-newspaper
+           └───batch
+           └───compute
+           Berksfile
+           node_newspaper.json
+           role_srv-newspaper.json
+           role_base.rb
+           role_srv-ftp.rb
+           vagrant.yaml
+           Vagrantfile
+           README.md
 
 change directory to c:\vagrantboxes\srv-newspaper
 run berks vendor cookbooks/ <- this will download all the cookbooks needed into a cookbooks sub directory located in c:\vagrantboxes\srv-newspaper\

@@ -10,13 +10,16 @@
 #   C:.
 #    ├───vagrantboxes
 #        └───srv-newspaper
-#               Berksfile
-#               node_srv-newspaper.json
-#               role_srv-newspaper.rb
-#               role_base.rb
-#               vagrant.yaml
-#               Vagrantfile
-#               README.md
+#           └───batch
+#           └───compute
+#           Berksfile
+#           node_newspaper.json
+#           role_srv-newspaper.json
+#           role_base.rb
+#           role_srv-ftp.rb
+#           vagrant.yaml
+#           Vagrantfile
+#           README.md
 #
 # Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
 #
@@ -38,6 +41,7 @@ enable_other_hosts : false
 load_sample_data : false
 enable_ftp : false
 ftp_password : Letme1n!!
+# For the newspaper the user is chronam
 
 # chef is same version as what we use in the library
 # we really only need role_srv-newspaper.rb for basic setup.  role_base ensures we get additional library setup settings that 
@@ -60,6 +64,8 @@ chef :
 # this basically says C:\data\srv-newspaper\core on my local machine will be
 # mounted as /opt/chronam-3.10/core on the virtual machine 
 # /opt/chronam-3.10/core is where chronam is deployed
+# For the newspaper the sync directory doesn't work well for EDITS.
+# Switched over to using FTP
 
 # You can have mutiple synced folders.
 # Just add more starting with - Like forward ports, etc.
@@ -77,6 +83,8 @@ syncDir :
 # chronam host port is setup here this basically says
 # port 8085 on my local machine will be
 # redirected to port 80 on the virtual machine    
+# 8085 is chronam
+# 20, 21, 4242, 4243 are for FTP
 
 forward_ports :  
     - host: 8085
@@ -91,7 +99,7 @@ forward_ports :
       guest: 20
       host_ip: 127.0.0.1
       id: ftp  
-    - host: 21
+    - host: 2121
       guest: 21
       host_ip: 127.0.0.1
       id: ftp1        
