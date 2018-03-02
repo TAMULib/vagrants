@@ -1,0 +1,9 @@
+{
+  "name": "stripes-vagrant-box",
+  "normal": {
+    "tags": [
+		"fresh_install"
+    ]
+  }
+}   
+ 
