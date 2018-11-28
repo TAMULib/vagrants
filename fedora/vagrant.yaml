@@ -1,0 +1,101 @@
+#
+# config file for apache / Tomcat box
+#
+# For this to work you need to do a "berks vendor cookbooks" from the C:\vagrantboxes/fedora/ directory
+# example: "berks vendor cookbooks/" 
+# this download the cookbooks from the chef server, and supermarket, etc into the directory defined in local_cookbooks_path
+# here is the directory structure I used with this.  All files are placed in the fedora directory
+# the cookbook directory will be created by "berks"
+#
+#   C:.
+#    ├───vagrantboxes
+#        └───fedora
+#               Berksfile
+#               node_tomcat.json
+#               role_tomcat.rb
+#               role_base.rb
+#               vagrant.yaml
+#               Vagrantfile
+#               README.md
+#
+# Cookbook versions are specified in the Berksfile.  This is the version that will be downloaded.
+#
+# At the time of this writing I am using:
+# chef-client version: 12.19.36
+# berks version: 5.6.4
+# kitchen version: 1.16.0
+# vagrant 1.9.3
+# Virtualbox 5.1.22
+
+# what base vm and settings we are using
+
+virtual_machine_base : bento/oracle-7.3
+box_name : fedora
+box_memory : 1024
+box_cpu : 1
+enable_sync : false
+enable_other_hosts : false
+
+# chef is same version as what we use in the library
+# we really only need role_apache for baseic setup.  role_base ensures we get additional library setup settings that 
+# system and networking uses 
+
+# node_file_name and role_file_name are actual names of files that will need to exist.  
+
+chef :
+    version                 : 12.19.33  
+    local_cookbooks_path    : C:\Vagrant/vagrants/fedora/cookbooks/
+    local_roles_path        : C:\Vagrant/vagrants/fedora/	
+    local_nodes_path        : C:\Vagrant/vagrants/fedora/
+    node_file_name          : node_fedora
+    roles                   :
+        -   role_file_name  : role_fedora
+
+
+# This is where the files on the local machine can live and then mapped to the virtual box
+# this basically says C:\data\tomcat_webapps on my local machine will be
+# mounted as /opt/tomcat/webapps on the virtual machine.
+# I saw extreem slowness on tomcat when I did this.  But it did work and could possibly be done better. 
+
+# You can have mutiple synced folders.
+# Just add more starting with - Like forward ports, etc.
+# By default I have enable_sync set to false.  You must set this to true for it to work.
+
+syncDir :
+    - host           : C:\data\fedora_webapps
+      guest          : /opt/tomcat/webapps/fcrepo
+      dmode          : 777
+      fmode          : 777
+      id             : webapps
+      owner          : vagrant
+      group          : vagrant     
+
+# tomcat host port is setup here this basically says
+# port 9000 on my local machine will be
+# redirected to port 9000 on the virtual machine    
+
+forward_ports :  
+    - host: 9000
+      guest: 9000
+      host_ip: 127.0.0.1
+      id: tomcat
+    - host: 2223
+      guest: 22
+      host_ip: 127.0.0.1
+      id: ssh      
+
+# At times you need one VM to find another.  This is a quick way to do that.
+# 10.0.2.2 is the default gateway on guest box so setting a hostname of additional vagrant boxes will 
+# cause it to look to the host machine for that box.  I also have these names set in my hosts file on my local box so I can 
+# use the same names.
+#
+# Since it is on another port it will loop back to that 
+# other box.
+#
+# By default I have enable_other_hosts set to false.  You must set this to true for it to work.
+
+other_hosts :  
+    - host: apache-php
+      host_ip: 10.0.2.2
+    - host: mysql
+      host_ip: 10.0.2.2      
