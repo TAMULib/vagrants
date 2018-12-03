@@ -1,0 +1,9 @@
+{
+  "name": "blacklight-vagrant-box",
+  "normal": {
+    "tags": [
+		"fresh_install"
+    ]
+  }
+}   
+ 

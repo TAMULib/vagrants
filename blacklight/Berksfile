@@ -1,0 +1,11 @@
+source 'https://supermarket.chef.io'
+source :chef_server
+
+# If you need to use Local cookbook path and not one on chef server
+# because local cookbook has modifications that are not uploaded yet
+# Example:  cookbook 'tl_app', path: 'C:\\Cookbooks/tl_app'
+
+cookbook 'tl_base', '0.3.13'
+cookbook 'tl_blacklight', '0.2.0'
+
+

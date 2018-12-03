@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "tl_app": ">= 0.0.0",
+        "seven_zip": "~> 3.0.0"
+    }
+}
